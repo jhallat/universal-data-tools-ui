@@ -1,0 +1,31 @@
+<app-division title='Data'>
+    <div *ngIf="data">
+        <div class='row'>
+            <div *ngFor="let heading of data.headings; let headingIndex=index" class='column'>
+                <div class='heading' [ngClass]="{'key' : heading.type !== 'A', 'top-left-corner' : headingIndex == 0}">
+                    {{ heading.name }}
+                </div>
+                <div *ngFor="let item of data.items" class='item'>
+                    {{ item[heading.name] }}
+                </div>
+            </div>
+            <div class='column'>
+                <div class='heading top-right-corner'>&nbsp;</div>
+                <div *ngFor="let item of data.items, let dataIndex=index" class='action'>
+                    <div>
+                        <button mat-icon-button (click)="onEditClicked(dataIndex)">
+                            <fa-icon [icon]="['far','edit']"></fa-icon>
+                        </button>
+                        <button mat-icon-button>
+                            <fa-icon [icon]="['far','trash-alt']"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button mat-button>
+            <fa-icon [icon]="['far', 'plus-square']"></fa-icon>
+            Add Item
+        </button>
+    </div>
+</app-division>

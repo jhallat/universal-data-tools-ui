@@ -1,0 +1,23 @@
+<app-division title='Tables'>
+    <div>
+        <button mat-button (click)="onCreateTable()">
+            <fa-icon [icon]="['fas', 'table']"></fa-icon>
+            Add Table
+        </button>
+    </div>
+    <div *ngIf="tables$ | async as tables">
+        <div *ngFor="let table of tables" class="table-description" 
+             [ngClass]="{'selected-table' : table.name === (selectedTable$ | async)}" (click)="onSelected(table.name)">
+            <div class="table-name">{{ table.name }}</div> 
+            <div>Size: {{ table.size}}</div>
+            <div>Keys:</div>
+            <div *ngFor="let key of table.keys" class="key-description">
+                <div class="key-name">{{ key.KeyType }}</div><div>{{ key.AttributeName }}</div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="errorMessage$ | async as errorMessage" class="error-message">
+        Error: {{ errorMessage }}
+    </div>
+</app-division>
+

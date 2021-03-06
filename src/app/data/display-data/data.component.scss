@@ -1,0 +1,58 @@
+@import "../../../assets/theme.scss";
+
+button {
+    color: $iconButtonColor;
+    font-weight: 400;
+}
+
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.cell {
+    border: $baseBorder;
+    padding: 10px;
+    height: 30px;
+}
+
+.action {
+    @extend .cell;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    color: $iconButtonColor;
+    border-top: none;
+}
+
+
+.key {
+    font-weight: bold;
+}
+
+.heading {
+    @extend .cell;
+    background-color: $highlightColor;
+    border-right: none;
+}
+
+.top-right-corner {
+    border-right: $baseBorder;
+    border-top-right-radius: $baseBorderRadius;
+}
+
+.item {
+    @extend .cell;
+    border-top: none;
+    border-right: none;
+}
+
+.top-left-corner {
+    border-top-left-radius: $baseBorderRadius;
+}

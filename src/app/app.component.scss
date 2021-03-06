@@ -1,0 +1,8 @@
+@import "../assets/theme.scss";
+
+.title {
+    background-color: $titleColor;
+    padding: $titlePadding;
+    box-shadow: $bottomShadow;
+    font-size: 24px;
+}

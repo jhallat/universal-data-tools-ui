@@ -1,0 +1,14 @@
+<app-division title='Data > Edit'>
+    <form novalidate [formGroup]="dataForm">
+        <div formArrayName="fields" *ngFor="let field of fields.controls; let fieldIndex = index">
+            <div [formGroupName]="fieldIndex">
+                <div>
+                    <input formControlName="heading" class="field heading" 
+                    [ngClass]="{'last bottom-left': fieldIndex == fields.controls.length - 1, 'top-left': fieldIndex == 0}"/>
+                    <input formControlName="value" class="field" 
+                    [ngClass]="{'last bottom-right': fieldIndex == fields.controls.length - 1, 'top-right': fieldIndex == 0}"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</app-division>

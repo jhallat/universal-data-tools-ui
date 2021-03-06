@@ -1,0 +1,29 @@
+@import "../../../assets/theme.scss";
+
+.field {
+    border: $baseBorder;
+    border-bottom: none;
+    border-radius: 0px;
+    padding: 8px;
+    &:disabled {
+        color: black;
+        background-color: $demphasizeColor;
+    }
+}
+
+.heading {
+    border-right: none;
+}
+
+.last {
+    border-bottom: $baseBorder;
+}
+
+@each $h in top, bottom {
+    @each $v in left, right {
+        .#{$h}-#{$v} {
+            border-#{$h}-#{$v}-radius: $baseBorderRadius;
+        }
+    }
+}
+

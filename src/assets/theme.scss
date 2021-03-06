@@ -1,0 +1,18 @@
+$baseBorderColor: darken(#7474A8, 10%);
+$iconButtonColor: darken($baseBorderColor, 10%);
+
+$titleColor: #F0CB98;
+$titlePadding: 15px;
+
+$highlightColor: #cdcde2;
+$demphasizeColor: lighten($highlightColor, 10%);
+
+$baseBorder: 1px solid $baseBorderColor; 
+$baseBorderRadius: 5px;
+
+$baseTextColor: black;
+$emphasisTextColor: lighten($baseTextColor, 40%);
+$headingTextSize: 16px;
+
+$bottomShadow: 0px 5px 5px gray;
+
