@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule} from '@angular/router';
+import { ConnectionComponent } from './connection/connection.component';
 
 @NgModule({
   imports: [RouterModule.forRoot([])],

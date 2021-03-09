@@ -16,7 +16,6 @@ export class TableService {
   getTables(): Observable<Table[]> {
     return this.http.get<Table[]>(this.tablesUrl)
       .pipe(
-        tap(data => console.log("tables: " + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }

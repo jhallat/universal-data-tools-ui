@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@import "../src/assets/theme.scss";
+
+@include mat-core();
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-udtaccent: (
+    50 : #fdf9f3,
+    100 : #fbefe0,
+    200 : #f8e5cc,
+    300 : #f5dbb7,
+    400 : #f2d3a7,
+    500 : #f0cb98,
+    600 : #eec690,
+    700 : #ecbe85,
+    800 : #e9b87b,
+    900 : #e5ac6a,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #fff9f2,
+    A700 : #ffedd9,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-udtprimary: (
+    50 : #eeeef5,
+    100 : #d5d5e5,
+    200 : #babad4,
+    300 : #9e9ec2,
+    400 : #8989b5,
+    500 : #7474a8,
+    600 : #6c6ca0,
+    700 : #616197,
+    800 : #57578d,
+    900 : #44447d,
+    A100 : #d6d6ff,
+    A200 : #a3a3ff,
+    A400 : #7070ff,
+    A700 : #5757ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #ffffff,
+    )
+);
+
+$udt-palette-primary: mat-palette($md-udtprimary);
+$udt-palette-accent: mat-palette($md-udtaccent);
+
+$udt-theme: mat-light-theme($udt-palette-primary, $udt-palette-accent);
+@include angular-material-theme($udt-theme);
+
+body {
+    margin: 0px;
+}

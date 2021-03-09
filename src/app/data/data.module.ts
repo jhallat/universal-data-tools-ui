@@ -9,7 +9,6 @@ import { RouterModule } from '@angular/router';
 import { DataComponent } from './display-data/data.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import { SharedModule } from '../shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { DataItemResolver } from './data-item-resolver.service';
 
 @NgModule({
@@ -27,7 +26,6 @@ import { DataItemResolver } from './data-item-resolver.service';
       { path: 'data/:tableName', component: DataComponent},
       { path: '**', component: SelectDataMessageComponent}
     ]),
-    ReactiveFormsModule,
     SharedModule
   ]
 })

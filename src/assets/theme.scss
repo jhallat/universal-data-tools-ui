@@ -3,6 +3,10 @@ $iconButtonColor: darken($baseBorderColor, 10%);
 
 $titleColor: #F0CB98;
 $titlePadding: 15px;
+$subTitlePadding: 0px 10px 5px 20px;
+$subTitleFontSize: 18px;
+$subContainerHeadingFontWeight: bold;
+$subContainerHeadingFontColor: $iconButtonColor;
 
 $highlightColor: #cdcde2;
 $demphasizeColor: lighten($highlightColor, 10%);

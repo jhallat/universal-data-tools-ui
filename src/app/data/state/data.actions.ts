@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Data, DataError } from "../data";
+import { Data } from "../data";
 
 
 export const loadData = createAction(
@@ -16,3 +16,4 @@ export const loadDataFailure = createAction(
     '[Data] Load Fail',
     props<{ error: string}>()
 );
+

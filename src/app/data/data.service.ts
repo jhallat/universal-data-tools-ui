@@ -33,6 +33,6 @@ export class DataService {
   private handleError(err: HttpErrorResponse): Observable<DataError> {
     let dataError = new DataError(100, err.statusText, "An error occurred retreiving data");
     console.error(err.message);
-    return throwError(err.message);
+    return throwError(dataError);
   }
 }

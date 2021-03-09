@@ -14,6 +14,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faDatabase } from '@fortawesome/free-solid-svg-icons';
 
 import { HomeComponent } from './home/home.component';
+import { ConnectionModule } from './connection/connection.module';
 
 
 @NgModule({
@@ -23,13 +24,14 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}, {}),
-    TableModule,
     EffectsModule.forRoot([]),
+    ConnectionModule,
+    TableModule,
     DataModule,
+    AppRoutingModule,
     FontAwesomeModule
   ],
   providers: [],
