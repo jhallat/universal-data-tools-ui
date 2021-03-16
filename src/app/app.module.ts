@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,11 @@ import { faDatabase } from '@fortawesome/free-solid-svg-icons';
 
 import { HomeComponent } from './home/home.component';
 import { ConnectionModule } from './connection/connection.module';
+import { NavigationModule } from './navigation/navigation.module';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { DockerModule } from './docker/docker.module';
+import { SharedModule } from './shared/shared.module';
+import { AddConnectionHeaderInterceptor } from './shared/add-connection-header.interceptor';
 
 
 @NgModule({
@@ -23,18 +28,24 @@ import { ConnectionModule } from './connection/connection.module';
     HomeComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({router: routerReducer}),
     EffectsModule.forRoot([]),
     ConnectionModule,
+    DockerModule,
+    NavigationModule,
     TableModule,
     DataModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    StoreRouterConnectingModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AddConnectionHeaderInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

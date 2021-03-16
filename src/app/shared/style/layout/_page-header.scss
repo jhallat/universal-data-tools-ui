@@ -1,0 +1,7 @@
+@import '../color/color';
+
+@mixin layout-page-header {
+    background-color: $pageHeaderColor;
+    padding: 10px 10px 10px 20px;
+    font-size: 1.25rem;
+}

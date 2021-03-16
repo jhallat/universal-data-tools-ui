@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { State } from '../state/app.state';
-import { ConnectionDefinition, ConnectionType } from './connection';
-import { getConnections, getConnectionToken, getConnectionTypes } from './state/connection.reducer';
+import { ConnectionDefinition, ConnectionType, Property, PropertyDefinition } from './connection';
+import { getConnections, getConnectionToken, getConnectionTypes } from './state';
 import * as ConnectionActions from './state/connection.actions';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
@@ -20,20 +20,25 @@ export class ConnectionComponent implements OnInit, OnDestroy {
   connections$!: Subscription;
   connectionTypes$!: Subscription;
   connect$!: Subscription;
-  connections!: ConnectionDefinition[]; 
+  connections!: ConnectionDefinition[];
   connectionTypes!: ConnectionType[];
   newConnectionForm!: FormGroup;
   connectionForm!: FormGroup;
+  selectedType = 0;
 
   constructor(private store: Store<State>,
-              private formBuilder: FormBuilder,
-              private router: Router) { }
+    private formBuilder: FormBuilder,
+    private router: Router) { }
+
+  get propertyFormArray(): FormArray {
+    return <FormArray>this.newConnectionForm.get('properties');
+  }
 
   ngOnInit(): void {
     this.newConnectionForm = this.formBuilder.group({
       connectionType: ['', Validators.required],
       description: [''],
-      url: ['', Validators.required]
+      properties: this.formBuilder.array([])
     })
 
     this.connectionForm = this.formBuilder.group({
@@ -56,10 +61,21 @@ export class ConnectionComponent implements OnInit, OnDestroy {
     this.connect$ = this.store.select(getConnectionToken).subscribe({
       next: data => {
         if (data.valid) {
-          this.router.navigate(["navigation"]);
+          //TODO Find a better way to handle this
+          console.log(`data.label = ${data.label}`)
+          switch(data.label) {
+            case "DOCKER": {
+              this.router.navigate(["docker"]);
+              break;
+            }
+            default: {
+              this.router.navigate(["navigation"]);
+            }
+          }
         }
       }
     })
+    this.onSelectType();
   }
 
   ngOnDestroy(): void {
@@ -68,8 +84,38 @@ export class ConnectionComponent implements OnInit, OnDestroy {
     this.connect$.unsubscribe;
   }
 
+  onSelectType() {
+    this.newConnectionForm.get("connectionType")?.valueChanges.subscribe(value => {
+      this.propertyFormArray.clear();
+      const connectionType = this.connectionTypes.find(item => item.id == value);
+      if (connectionType?.propertyDefinitions) {
+        for (let property of connectionType?.propertyDefinitions) {
+          this.propertyFormArray.push(this.buildProperty(property, ""));
+        }
+      }
+      console.log(connectionType);
+    })
+  }
+
+  buildProperty(propertyDefinition: PropertyDefinition, value: string): FormGroup {
+    if (propertyDefinition.required) {
+      return this.formBuilder.group({
+        propertyId: [propertyDefinition.propertyId],
+        property: [propertyDefinition.description],
+        masked: [propertyDefinition.masked],
+        value: [value, Validators.required]
+      })      
+    }
+    return this.formBuilder.group({
+      propertyId: [propertyDefinition.propertyId],
+      property: [propertyDefinition.description],
+      masked: [propertyDefinition.masked],
+      value
+    })
+  }
+
   connect(): void {
-    this.store.dispatch(ConnectionActions.connect( { connectionId: this.connectionForm.get("connection")?.value} ));
+    this.store.dispatch(ConnectionActions.connect({ connectionId: this.connectionForm.get("connection")?.value }));
   }
 
   cancel(): void {
@@ -82,13 +128,22 @@ export class ConnectionComponent implements OnInit, OnDestroy {
 
   createNewConnection(): void {
     if (this.newConnectionForm.valid) {
+      const properties: Property[] = [];
+      for (let propertyControl of this.propertyFormArray.controls) {
+        const property = {
+          propertyId: propertyControl.get("propertyId")?.value,
+          value: propertyControl.get("value")?.value
+        }
+        properties.push(property);
+      }
+
       const connection = {
         id: 0,
         typeId: this.newConnectionForm.get("connectionType")?.value,
         description: this.newConnectionForm.get("description")?.value,
-        url: this.newConnectionForm.get("url")?.value
+        properties
       }
-      this.store.dispatch(ConnectionActions.addConnection( { connection }));
+      this.store.dispatch(ConnectionActions.addConnection({ connection }));
       this.createConnection = false;
     }
   }

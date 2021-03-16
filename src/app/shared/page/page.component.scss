@@ -1,0 +1,16 @@
+@import "../style/layout/page-header";
+
+:host {
+    font-size: 1rem;
+}
+
+.page-header {
+    @include layout-page-header;
+}
+
+.page-contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 30px;
+}

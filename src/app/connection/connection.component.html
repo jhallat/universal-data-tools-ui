@@ -1,36 +1,32 @@
-<div class='sub-heading'>Connections</div>
-<div class="container">
-    <form novalidate [formGroup]="connectionForm">
-    <div class="sub-container">
-        <ng-container *ngIf="connections && connections.length > 0; else noConnection">
-            <mat-form-field appearance="fill">
-                <mat-label>Available Connections</mat-label>
-                <mat-select formControlName="connection">
-                    <mat-option *ngFor="let connection of connections" [value]="connection.id">
-                        {{ connection.description }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <div class="button-bar">
-                <button mat-button color='primary' 
-                   [disabled]="!connectionForm.valid"    
-                   (click)="connect()">
-                    Connect
-                </button>
-                <button mat-button color='primary' (click)="displayNewConnection()">
-                    Create New Connection
-                </button>
-            </div>
-        </ng-container>
-        <ng-template #noConnection>
-            No connections available
-        </ng-template>
-    </div>
+<app-page title='Connection'>
+    <form novalidate [formGroup]="connectionForm" class="group-width">
+        <app-group title="Connect">
+            <ng-container *ngIf="connections && connections.length > 0; else noConnection">
+                <mat-form-field appearance="fill">
+                    <mat-label>Available Connections</mat-label>
+                    <mat-select formControlName="connection">
+                        <mat-option *ngFor="let connection of connections" [value]="connection.id">
+                            {{ connection.description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="button-bar">
+                    <button mat-button color='primary' [disabled]="!connectionForm.valid" (click)="connect()">
+                        Connect
+                    </button>
+                    <button mat-button color='primary' (click)="displayNewConnection()">
+                        Create New Connection
+                    </button>
+                </div>
+            </ng-container>
+            <ng-template #noConnection>
+                No connections available
+            </ng-template>
+        </app-group>
     </form>
     <div *ngIf="createConnection">
-        <form novalidate [formGroup]="newConnectionForm">
-            <div class="sub-container">
-                <div class="sub-container-heading">Create New Connection</div>
+        <form novalidate [formGroup]="newConnectionForm" class="group-width">
+            <app-group title="Create New Connection" class="form-group">
                 <mat-form-field>
                     <mat-label>Connection Type</mat-label>
                     <mat-select formControlName="connectionType">
@@ -43,18 +39,27 @@
                     <mat-label>Description</mat-label>
                     <input matInput formControlName="description" />
                 </mat-form-field>
-                <mat-form-field>
-                    <mat-label>URL</mat-label>
-                    <input matInput formControlName="url" />
-                </mat-form-field>
+                <ng-container formArrayName="properties"
+                    *ngFor="let property of propertyFormArray.controls; let propertyIndex = index">
+                    <ng-container [formGroupName]="propertyIndex">
+                        <mat-form-field>
+                            <mat-label>{{ property.get("property")?.value !== null ? property.get("property")?.value :
+                                '' }}</mat-label>
+                            <ng-container *ngIf="!property.get('masked')?.value;  else mask">
+                                <input matInput formControlName="value" />
+                            </ng-container>
+                            <ng-template #mask>
+                                <input matInput type="password" formControlName="value" />
+                            </ng-template>
+                        </mat-form-field>
+                    </ng-container>
+                </ng-container>
                 <div class="button-bar">
-                    <button mat-button color='primary' 
-                    [disabled]="!newConnectionForm.valid" 
-                    (click)="createNewConnection()">Create</button>
-                    <button mat-button color='primary'
-                    (click)="cancel()">Cancel</button>
+                    <button mat-button color='primary' [disabled]="!newConnectionForm.valid"
+                        (click)="createNewConnection()">Create</button>
+                    <button mat-button color='primary' (click)="cancel()">Cancel</button>
                 </div>
-            </div>
+            </app-group>
         </form>
     </div>
-</div>
+</app-page>

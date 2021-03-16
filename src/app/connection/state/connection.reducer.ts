@@ -1,6 +1,8 @@
-import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store";
 import { ConnectionDefinition, ConnectionToken, ConnectionType } from "../connection";
 import * as ConnectionActions from './connection.actions';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 
 export interface ConnectionState {
     connectionTypes: ConnectionType[];
@@ -14,7 +16,7 @@ const initialState: ConnectionState = {
     connectionTypes: [],
     currentConnectionId: 0,
     connections: [],
-    connectionToken: {token: '', description: '', valid: false},
+    connectionToken: {token: '', description: '', label: '', valid: false},
     error: ''
 }
 

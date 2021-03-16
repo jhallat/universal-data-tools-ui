@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { ServiceError } from '../shared';
 import { environment } from './../../environments/environment';
-import { ConnectionDefinition, ConnectionError, ConnectionToken, ConnectionType } from './connection';
+import { ConnectionDefinition, ConnectionToken, ConnectionType } from './connection';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ConnectionService {
 
   constructor(private http: HttpClient) { }
 
-  getConnectionTypes(): Observable<ConnectionType[] | ConnectionError> {
+  getConnectionTypes(): Observable<ConnectionType[] | ServiceError> {
     console.debug(`${this.urlDataSource}/types`);
     return this.http.get<ConnectionType[]>(`${this.urlDataSource}/types`)
     .pipe(
@@ -22,14 +23,15 @@ export class ConnectionService {
     )
   }
 
-  getConnections(): Observable<ConnectionDefinition[] | ConnectionError> {
+  getConnections(): Observable<ConnectionDefinition[] | ServiceError> {
     return this.http.get<ConnectionDefinition[]>(`${this.urlDataSource}/connections`)
     .pipe(
       catchError(err => this.handleError(err,"An error occured retreiving connections"))
     )
   }
 
-  addConnection(connection: ConnectionDefinition): Observable<ConnectionDefinition | ConnectionError > {
+  addConnection(connection: ConnectionDefinition): Observable<ConnectionDefinition | ServiceError > {
+    console.log(connection);
     return this.http.post<ConnectionDefinition>(`${this.urlDataSource}/connection`,
       connection)
     .pipe(
@@ -37,16 +39,18 @@ export class ConnectionService {
     );
   }
 
-  connect(connectionId: string): Observable<ConnectionToken | ConnectionError > {
+  connect(connectionId: string): Observable<ConnectionToken | ServiceError > {
     return this.http.get<ConnectionToken>(`${this.urlDataSource}/connect/${connectionId}`)
     .pipe(
+      tap(data => window.localStorage.setItem("connection-token", data.token)),
       catchError(err => this.handleError(err,"An error occured connecting to data source"))
     )
   }
 
-  private handleError(err: HttpErrorResponse, localMessage: string): Observable<ConnectionError> {
-    let connectionError = new ConnectionError(100, err.statusText, localMessage);
+  private handleError(err: HttpErrorResponse, localMessage: string): Observable<ServiceError> {
+    let connectionError = new ServiceError(100, err.statusText, localMessage);
     console.error(err.message);
+    window.localStorage.setItem("connection-token", "");
     return throwError(connectionError);
   }
 

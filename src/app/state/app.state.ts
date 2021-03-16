@@ -1,5 +1,6 @@
-import { TableState } from "../table/state/table.reducer";
+import { ConnectionState } from "../connection/state";
 
 export interface State {
-    tables: TableState;
+    connection: ConnectionState;
 }
+

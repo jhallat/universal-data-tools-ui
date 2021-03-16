@@ -9,12 +9,15 @@ import { faChevronLeft, faTable, faPlug } from '@fortawesome/free-solid-svg-icon
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 import { DivisionComponent } from './division/division.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PageComponent } from './page/page.component';
+import { GroupComponent } from './group/group.component';
 
 
 @NgModule({
-  declarations: [DivisionComponent],
+  declarations: [DivisionComponent, PageComponent, GroupComponent],
   imports: [
     CommonModule
   ],
@@ -23,9 +26,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatSelectModule,
     MatInputModule,
+    MatTableModule,
     FontAwesomeModule,
     DivisionComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PageComponent,
+    GroupComponent
   ]
 })
 export class SharedModule {

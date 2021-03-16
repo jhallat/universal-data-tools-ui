@@ -23,8 +23,7 @@ import { DataItemResolver } from './data-item-resolver.service';
     EffectsModule.forFeature([DataEffects]),
     RouterModule.forChild([
       { path: 'data/edit/:tableName', component: EditItemComponent, resolve: { resolvedData: DataItemResolver} },
-      { path: 'data/:tableName', component: DataComponent},
-      { path: '**', component: SelectDataMessageComponent}
+      { path: 'data/:tableName', component: DataComponent}
     ]),
     SharedModule
   ]

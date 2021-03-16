@@ -1,0 +1,7 @@
+@import '../color/_color';
+
+@mixin group-border {
+    border: 1px solid $borderColor; 
+    border-radius: 5px;
+    padding: 10px;
+}

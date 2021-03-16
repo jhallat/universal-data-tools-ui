@@ -1,0 +1,21 @@
+@import "../style/layout/group";
+@import "../style/color/color";
+
+:host {
+    font-size: 1rem;
+}
+
+.group-header {
+    color: $groupHeaderColor;
+    font-size: 1.1rem;
+    padding-bottom: 10px;
+}
+
+.group {
+    @include group-border;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    padding: 10px;
+    flex: 0 0 auto;
+}

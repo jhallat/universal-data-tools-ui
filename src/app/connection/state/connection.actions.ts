@@ -2,60 +2,60 @@ import { createAction, props } from "@ngrx/store";
 import { ConnectionDefinition, ConnectionToken, ConnectionType } from "../connection";
 
 export const loadConnectionTypes = createAction(
-    '[Connection] Load Types'
+    '[Connection Page] Load Types'
 );
 
 export const loadConnectionTypesSuccess = createAction(
-    '[Connection] Load Types Success',
+    '[Connection API] Load Types Success',
     props<{ connectionTypes: ConnectionType[] }>()
 );
 
 export const loadConnectionTypesFailure = createAction(
-    '[Connection] Load Types Fail',
+    '[Connection API] Load Types Fail',
     props<{ error: string }>()
 );
 
 export const loadConnections = createAction(
-    '[Connection] Load Connections'
+    '[Connection Page] Load Connections'
 );
 
 export const loadConnectionsSuccess = createAction(
-    '[Connection] Load Connections Success',
+    '[Connection API] Load Connections Success',
     props<{ connectionDefinitions: ConnectionDefinition[] }>()
 );
 
 export const loadConnectionsFailure = createAction(
-    '[Connection] Load Connections Fail',
+    '[Connection API] Load Connections Fail',
     props<{ error: string }>()
 );
 
 export const addConnection = createAction(
-    '[Connection] Add Connection',
+    '[Connection Page] Add Connection',
     props<{ connection: ConnectionDefinition }>()
 );
 
 export const addConnectionSuccess = createAction(
-    '[Connection] Add Connection Success',
+    '[Connection API] Add Connection Success',
     props<{ connection: ConnectionDefinition }>()
 );
 
 export const addConnectionFailure = createAction(
-    '[Connection] Add Connection Failure',
+    '[Connection API] Add Connection Failure',
     props<{ error: string }>()
 );
 
 export const connect = createAction(
-    '[Connection] Connect',
+    '[Connection Page] Connect',
     props<{ connectionId: string }>()
 );
 
 export const connectSuccess = createAction(
-    '[Connection] Connect Success',
+    '[Connection API] Connect Success',
     props<{ connectionToken: ConnectionToken }>()
 );
 
 export const connectFailure = createAction(
-    '[Connection] Connect Failure',
+    '[Connection API] Connect Failure',
     props<{ error: string }>()
 );
 
