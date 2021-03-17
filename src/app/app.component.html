@@ -1,7 +1,15 @@
 <div>
   <div class="title">
-    <fa-icon [icon]="['fas', 'database']"></fa-icon> 
-    Universal Data Tools
-  </div>  
+    <div>
+      <fa-icon [icon]="['fas', 'database']"></fa-icon>
+      Universal Data Tools
+    </div>
+    <button mat-button [matMenuTriggerFor]="connectionMenu">
+      <fa-icon [icon]="['fas', 'plug']"></fa-icon>&nbsp;{{ connection }}
+    </button>
+    <mat-menu #connectionMenu="matMenu">
+      <button mat-menu-item (click)="disconnect()">Close Connection</button>
+    </mat-menu>
+  </div>
   <router-outlet></router-outlet>
 </div>

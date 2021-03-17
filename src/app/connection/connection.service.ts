@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ServiceError } from '../shared';
@@ -13,7 +14,8 @@ export class ConnectionService {
 
   private urlDataSource = `${environment.apiUrl}/data-sources`; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private router: Router) { }
 
   getConnectionTypes(): Observable<ConnectionType[] | ServiceError> {
     console.debug(`${this.urlDataSource}/types`);
@@ -45,6 +47,15 @@ export class ConnectionService {
       tap(data => window.localStorage.setItem("connection-token", data.token)),
       catchError(err => this.handleError(err,"An error occured connecting to data source"))
     )
+  }
+
+  disconnect() {
+    console.log("Disconnecting");
+    const connectionToken = window.localStorage.getItem("connection-token");
+    this.http.put<void>(`${this.urlDataSource}/disconnect/${connectionToken}`, {})
+      .subscribe().unsubscribe();
+    window.localStorage.setItem("connection-token", "");
+    this.router.navigate(['/connection']);
   }
 
   private handleError(err: HttpErrorResponse, localMessage: string): Observable<ServiceError> {

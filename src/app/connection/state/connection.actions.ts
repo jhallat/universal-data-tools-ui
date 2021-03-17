@@ -59,4 +59,12 @@ export const connectFailure = createAction(
     props<{ error: string }>()
 );
 
+export const disconnect = createAction(
+    '[Connection Page] Disconnect'
+)
+
+export const disconnectSuccess = createAction(
+    '[Connection API] Disconnect Success'
+)
+
 

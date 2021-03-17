@@ -71,4 +71,14 @@ export class ConnectionEffects {
             ))
         )
     })
+
+    disconnect$ = createEffect(() => {
+        return this.action$.pipe(
+            ofType(ConnectionActions.disconnect),
+            map((action) => {
+                this.connectionService.disconnect();
+                return ConnectionActions.disconnectSuccess();
+            })
+        )
+    })
 }

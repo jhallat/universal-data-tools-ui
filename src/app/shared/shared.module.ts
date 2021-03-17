@@ -7,9 +7,11 @@ import { faTrashAlt, faEdit, faPlusSquare } from '@fortawesome/free-regular-svg-
 import { faChevronLeft, faTable, faPlug } from '@fortawesome/free-solid-svg-icons';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+
 import { DivisionComponent } from './division/division.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PageComponent } from './page/page.component';
@@ -27,6 +29,7 @@ import { GroupComponent } from './group/group.component';
     MatSelectModule,
     MatInputModule,
     MatTableModule,
+    MatMenuModule,
     FontAwesomeModule,
     DivisionComponent,
     ReactiveFormsModule,

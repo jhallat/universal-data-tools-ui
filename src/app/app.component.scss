@@ -2,6 +2,10 @@
 
 .title {
     background-color: $appHeaderColor;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 15px;;
     font-size: 1.5rem;
+
 }

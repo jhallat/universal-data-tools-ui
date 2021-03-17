@@ -2,6 +2,7 @@ import { createReducer, on } from "@ngrx/store";
 import { ConnectionDefinition, ConnectionToken, ConnectionType } from "../connection";
 import * as ConnectionActions from './connection.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { state } from "@angular/animations";
 
 
 export interface ConnectionState {
@@ -96,5 +97,11 @@ export const connectionReducer = createReducer<ConnectionState>(
             ...state,
             error: action.error
         }        
+    }),
+    on(ConnectionActions.disconnectSuccess, (state, action): ConnectionState => {
+        return {
+            ...state,
+            connectionToken: {token: '', description: '', label: '', valid: false}
+        }
     })
 )
