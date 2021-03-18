@@ -13,7 +13,7 @@ import { DockerService } from '../docker.service';
 })
 export class DockerContainerComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = ['containerId', 'image', 'command', 'created', 'status', 'ports', 'names'];
+  displayedColumns: string[] = ['containerId', 'image', 'command', 'created', 'status', 'ports', 'names', 'actions'];
   containers: DockerContainer[] = [];
   containers$!: Subscription;
 
@@ -30,6 +30,18 @@ export class DockerContainerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.containers$.unsubscribe;
+  }
+
+  onStart(containerId: string) {
+    this.store.dispatch(DockerActions.startContainer({containerId}));
+  }
+
+  onStop(containerId: string) {
+    this.store.dispatch(DockerActions.stopContainer({containerId}));
+  }
+
+  isRunning(status: string): boolean {
+    return status.startsWith("Up");
   }
 
 }

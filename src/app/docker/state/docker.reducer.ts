@@ -29,6 +29,7 @@ export const getError = createSelector(
     state => state.error
 )
 
+//TOOD can some of theses actions/reducers be merged?
 export const dockerReducer = createReducer<DockerState>(
     initialState,
     on(DockerActions.loadContainersSuccess, (state, action): DockerState => {
@@ -42,5 +43,35 @@ export const dockerReducer = createReducer<DockerState>(
             ...state,
             error: action.error
         }
-    })    
+    }),
+    on(DockerActions.startContainerSuccess, (state, action): DockerState => {
+        const containerId = action.container.containerId;
+        const updatedContainers = state.containers.map(
+            item => item.containerId === containerId ? action.container : item)
+        return {
+            ...state,
+            containers: updatedContainers
+        }    
+    }),
+    on(DockerActions.startContainerFailure, (state, action): DockerState => {
+        return {
+            ...state,
+            error: action.error
+        }
+    }),    
+    on(DockerActions.stopContainerSuccess, (state, action): DockerState => {
+        const containerId = action.container.containerId;
+        const updatedContainers = state.containers.map(
+            item => item.containerId === containerId ? action.container : item)
+        return {
+            ...state,
+            containers: updatedContainers
+        }    
+    }),
+    on(DockerActions.stopContainerFailure, (state, action): DockerState => {
+        return {
+            ...state,
+            error: action.error
+        }
+    }),        
 )

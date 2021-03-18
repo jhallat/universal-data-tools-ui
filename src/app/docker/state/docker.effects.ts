@@ -25,4 +25,34 @@ export class DockerEffects {
             ))
         )
     });    
+
+    startDockerContainer$ = createEffect(() => {
+        return this.action$.pipe(
+            ofType(DockerActions.startContainer),
+            mergeMap((action) => this.dockerService.startContainer(action.containerId).pipe(
+                map((data: DockerContainer | ServiceError) => {
+                    if (data instanceof ServiceError) {
+                        return DockerActions.startContainerFailure( { error: data.localMessage });        
+                    } else {
+                        return DockerActions.startContainerSuccess( { container: data });
+                    }
+                })
+            ))
+        )
+    });  
+
+    stopDockerContainer$ = createEffect(() => {
+        return this.action$.pipe(
+            ofType(DockerActions.stopContainer),
+            mergeMap((action) => this.dockerService.stopContainer(action.containerId).pipe(
+                map((data: DockerContainer | ServiceError) => {
+                    if (data instanceof ServiceError) {
+                        return DockerActions.stopContainerFailure( { error: data.localMessage });        
+                    } else {
+                        return DockerActions.stopContainerSuccess( { container: data });
+                    }
+                })
+            ))
+        )
+    }); 
 }
