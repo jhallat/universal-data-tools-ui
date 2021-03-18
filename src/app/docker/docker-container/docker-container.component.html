@@ -1,36 +1,53 @@
 <app-page title='Docker'>
     <app-group title='Containers'>
-    <table mat-table [dataSource]="containers" class="mat-elevation-z2">
-        <ng-container matColumnDef="containerId">
-            <th class="table-cell" mat-header-cell *matHeaderCellDef>Container Id</th>
-            <td class="table-cell" mat-cell *matCellDef="let container">{{ container.containerId }}</td>
-        </ng-container>
-        <ng-container matColumnDef="image">
-            <th class="table-cell" mat-header-cell *matHeaderCellDef>Image</th>
-            <td class="table-cell" mat-cell *matCellDef="let container">{{ container.image }}</td>
-        </ng-container>
-        <ng-container matColumnDef="command">
-            <th class="table-cell" mat-header-cell *matHeaderCellDef>Command</th>
-            <td class="table-cell" mat-cell *matCellDef="let container">{{ container.command }}</td>
-        </ng-container>        
-        <ng-container matColumnDef="created">
-            <th class="table-cell" mat-header-cell *matHeaderCellDef>Created</th>
-            <td class="table-cell" mat-cell *matCellDef="let container">{{ container.created }}</td>
-        </ng-container>    
-        <ng-container matColumnDef="status">
-            <th class="table-cell" mat-header-cell *matHeaderCellDef>Status</th>
-            <td class="table-cell" mat-cell *matCellDef="let container">{{ container.status }}</td>
-        </ng-container>                        
-        <ng-container matColumnDef="ports">
-            <th class="table-cell" mat-header-cell *matHeaderCellDef>Ports</th>
-            <td class="table-cell" mat-cell *matCellDef="let container">{{ container.ports }}</td>
-        </ng-container>                                
-        <ng-container matColumnDef="names">
-            <th class="table-cell" mat-header-cell *matHeaderCellDef>Names</th>
-            <td class="table-cell" mat-cell *matCellDef="let container">{{ container.names }}</td>
-        </ng-container>   
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>                                             
-    </table>
+        <table mat-table [dataSource]="containers" class="mat-elevation-z2">
+            <ng-container matColumnDef="containerId">
+                <th class="table-cell" mat-header-cell *matHeaderCellDef>Container Id</th>
+                <td class="table-cell" mat-cell *matCellDef="let container">{{ container.containerId }}</td>
+            </ng-container>
+            <ng-container matColumnDef="image">
+                <th class="table-cell" mat-header-cell *matHeaderCellDef>Image</th>
+                <td class="table-cell" mat-cell *matCellDef="let container">{{ container.image }}</td>
+            </ng-container>
+            <ng-container matColumnDef="command">
+                <th class="table-cell" mat-header-cell *matHeaderCellDef>Command</th>
+                <td class="table-cell" mat-cell *matCellDef="let container">{{ container.command }}</td>
+            </ng-container>
+            <ng-container matColumnDef="created">
+                <th class="table-cell" mat-header-cell *matHeaderCellDef>Created</th>
+                <td class="table-cell" mat-cell *matCellDef="let container">{{ container.created }}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th class="table-cell" mat-header-cell *matHeaderCellDef>Status</th>
+                <td class="table-cell" mat-cell *matCellDef="let container">{{ container.status }}</td>
+            </ng-container>
+            <ng-container matColumnDef="ports">
+                <th class="table-cell" mat-header-cell *matHeaderCellDef>Ports</th>
+                <td class="table-cell" mat-cell *matCellDef="let container">{{ container.ports }}</td>
+            </ng-container>
+            <ng-container matColumnDef="names">
+                <th class="table-cell" mat-header-cell *matHeaderCellDef>Names</th>
+                <td class="table-cell" mat-cell *matCellDef="let container">{{ container.names }}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th class="table-cell" mat-header-cell *matHeaderCellDef>Actions</th>
+                <td class="table-cell" mat-cell *matCellDef="let container">
+                    <ng-container *ngIf="isRunning(container.status); else notRunning">
+                        <button mat-icon-button matTooltip="Stop Container" aria-label="Stop container"
+                            (click)="onStop(container.containerId)">
+                            <fa-icon [icon]="['fas', 'stop']"></fa-icon>
+                        </button>
+                    </ng-container>
+                    <ng-template #notRunning>
+                        <button mat-icon-button matTooltip="Start Container" aria-label="Start container"
+                            (click)="onStart(container.containerId)">
+                            <fa-icon [icon]="['fas', 'play']"></fa-icon>
+                        </button>                        
+                    </ng-template>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
     </app-group>
-</app-page>    
+</app-page>

@@ -22,6 +22,20 @@ export class DockerService {
     )
   }
 
+  startContainer(containerId: string): Observable<DockerContainer | ServiceError> {
+    return this.http.post<DockerContainer>(`${this.urlDocker}/container/start/${containerId}`, {})
+    .pipe(
+      catchError(err => this.handleError(err, "An error occured starting docker container"))
+    )
+  }
+
+  stopContainer(containerId: string): Observable<DockerContainer | ServiceError> {
+    return this.http.post<DockerContainer>(`${this.urlDocker}/container/stop/${containerId}`, {})
+    .pipe(
+      catchError(err => this.handleError(err, "An error occured stopping docker container"))
+    )
+  }
+
   private handleError(err: HttpErrorResponse, localMessage: string): Observable<ServiceError> {
     let connectionError = new ServiceError(100, err.statusText, localMessage);
     console.error(err.message);
