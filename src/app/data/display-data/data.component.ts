@@ -14,11 +14,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DataComponent implements OnInit, OnDestroy {
   data$!: Subscription ;
-  data!: Data; 
-  tableName!: string | null
+  data!: Data;
+  tableName!: string | null;
 
   constructor(private store: Store<State>,
-              private activatedRoute:ActivatedRoute,
+              private activatedRoute: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class DataComponent implements OnInit, OnDestroy {
       next: data => {
         this.data = data;
         if (data.headings.length === 0) {
-          this.router.navigate(["select-table"]);
+          this.router.navigate(['select-table']);
         }
       }
     });
@@ -37,21 +37,21 @@ export class DataComponent implements OnInit, OnDestroy {
         if (this.tableName) {
           this.store.dispatch(DataActions.loadData({ tableName: this.tableName }));
         } else {
-          this.router.navigate(["select-table"]);
+          this.router.navigate(['select-table']);
         }
-    
+
       }
-    )
+    );
   }
 
   ngOnDestroy(): void {
     this.data$.unsubscribe();
   }
 
-  onEditClicked(index: number) {
+  onEditClicked(index: number): void {
     const editItem = this.data.items[index];
-    let queryParams: any = {};
-    for (let heading of this.data.headings) {
+    const queryParams: any = {};
+    for (const heading of this.data.headings) {
       if (heading.type !== 'A') {
         queryParams[heading.name] = editItem[heading.name];
       }

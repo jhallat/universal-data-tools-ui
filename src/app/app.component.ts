@@ -11,7 +11,7 @@ import * as ConnectionActions from './connection/state/connection.actions';
 })
 export class AppComponent implements OnInit {
 
-  connection = ""
+  connection = '';
 
   constructor(private store: Store<State>) { }
 
@@ -25,10 +25,10 @@ export class AppComponent implements OnInit {
           this.connection = '';
         }
       }
-    })
+    });
   }
 
   disconnect(): void {
-    this.store.dispatch(ConnectionActions.disconnect())
+    this.store.dispatch(ConnectionActions.disconnect());
   }
 }
