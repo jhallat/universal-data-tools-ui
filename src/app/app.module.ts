@@ -20,6 +20,7 @@ import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { DockerModule } from './docker/docker.module';
 import { SharedModule } from './shared/shared.module';
 import { AddConnectionHeaderInterceptor } from './shared/add-connection-header.interceptor';
+import { DatabaseModule } from './database/database.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AddConnectionHeaderInterceptor } from './shared/add-connection-header.i
     EffectsModule.forRoot([]),
     ConnectionModule,
     DockerModule,
+    DatabaseModule,
     NavigationModule,
     TableModule,
     DataModule,

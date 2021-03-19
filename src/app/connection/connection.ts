@@ -26,6 +26,15 @@ export interface ConnectionDefinition {
 export interface ConnectionToken {
     token: string;
     description: string;
-    label: string;
+    type: string;
+    page: string;
     valid: boolean;
+}
+
+export const EMPTY_CONNECTION_TOKEN: ConnectionToken = {
+    token: '',
+    description: '',
+    type: '',
+    page: '',
+    valid: false
 }
