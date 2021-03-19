@@ -5,6 +5,7 @@ import { DockerContainer } from '../docker';
 import { getContainers, State } from '../state/docker.reducer';
 import * as DockerActions from '../state/docker.actions';
 import { DockerService } from '../docker.service';
+import {Menu, MenuBuilder, MenuItem} from '../../shared/page/menu';
 
 @Component({
   selector: 'app-docker-container',
@@ -17,31 +18,40 @@ export class DockerContainerComponent implements OnInit, OnDestroy {
   containers: DockerContainer[] = [];
   containers$!: Subscription;
 
+  menus: Menu[] = [];
+
   constructor(private store: Store<State>) { }
 
   ngOnInit(): void {
+    this.menus = new MenuBuilder().forMenu('Container')
+      .addItem('Create New Container')
+      .withAction(this.onCreateContainer)
+      .create();
     this.store.dispatch(DockerActions.loadContainers());
     this.containers$ = this.store.select(getContainers).subscribe({
       next: data => {
         this.containers = data;
       }
-    })
+    });
   }
 
   ngOnDestroy(): void {
-    this.containers$.unsubscribe;
+    this.containers$.unsubscribe();
   }
 
-  onStart(containerId: string) {
+  onStart(containerId: string): void {
     this.store.dispatch(DockerActions.startContainer({containerId}));
   }
 
-  onStop(containerId: string) {
+  onStop(containerId: string): void {
     this.store.dispatch(DockerActions.stopContainer({containerId}));
   }
 
   isRunning(status: string): boolean {
-    return status.startsWith("Up");
+    return status.startsWith('Up');
   }
 
+  onCreateContainer(): void {
+    console.log('onCreateContainer() called');
+  }
 }

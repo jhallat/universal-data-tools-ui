@@ -1,4 +1,18 @@
-<div class='page-header'>{{ title }}</div>
+<div class='page-header'>
+  <div>{{ title }}</div>
+  <div *ngIf="menus">
+    <ng-container *ngFor="let menu of menus">
+      <button mat-button [matMenuTriggerFor]="pageMenu">{{menu.caption}}</button>
+      <mat-menu #pageMenu="matMenu">
+        <ng-container *ngFor="let item of menu.items">
+          <button mat-menu-item (click)="item.action()">
+            {{item.caption}}
+          </button>
+        </ng-container>
+      </mat-menu>
+    </ng-container>
+  </div>
+</div>
 <div class='page-contents'>
     <ng-content></ng-content>
-</div>  
+</div>

@@ -22,7 +22,10 @@ import { GroupComponent } from './group/group.component';
 @NgModule({
   declarations: [DivisionComponent, PageComponent, GroupComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    MatButtonModule,
+    MatMenuModule,
+    FontAwesomeModule
   ],
   exports: [
     CommonModule,
@@ -41,12 +44,12 @@ import { GroupComponent } from './group/group.component';
 })
 export class SharedModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faChevronLeft, 
-      faTrashAlt, 
-      faEdit, 
-      faPlusSquare, 
-      faTable, 
-      faPlug, 
+    library.addIcons(faChevronLeft,
+      faTrashAlt,
+      faEdit,
+      faPlusSquare,
+      faTable,
+      faPlug,
       faPlay,
       faStop);
   }

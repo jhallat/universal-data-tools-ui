@@ -2,6 +2,10 @@
 
 @mixin layout-page-header {
     background-color: $pageHeaderColor;
-    padding: 10px 10px 10px 20px;
+    padding: 10px;
+    padding-left: 20px;
     font-size: 1.25rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

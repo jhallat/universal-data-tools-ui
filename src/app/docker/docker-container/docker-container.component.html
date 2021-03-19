@@ -1,4 +1,4 @@
-<app-page title='Docker'>
+<app-page title='Docker' [menus]="menus">
     <app-group title='Containers'>
         <table mat-table [dataSource]="containers" class="mat-elevation-z2">
             <ng-container matColumnDef="containerId">
@@ -42,7 +42,7 @@
                         <button mat-icon-button matTooltip="Start Container" aria-label="Start container"
                             (click)="onStart(container.containerId)">
                             <fa-icon [icon]="['fas', 'play']"></fa-icon>
-                        </button>                        
+                        </button>
                     </ng-template>
                 </td>
             </ng-container>
