@@ -19,7 +19,11 @@ export class AppComponent implements OnInit {
 
     this.store.select(getConnectionToken).subscribe({
       next: data => {
-        this.connection = data.description;
+        if (data.valid) {
+          this.connection = data.description;
+        } else {
+          this.connection = '';
+        }
       }
     })
   }

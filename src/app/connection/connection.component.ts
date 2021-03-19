@@ -25,6 +25,7 @@ export class ConnectionComponent implements OnInit, OnDestroy {
   newConnectionForm!: FormGroup;
   connectionForm!: FormGroup;
   selectedType = 0;
+  connectionError = '';
 
   constructor(private store: Store<State>,
     private formBuilder: FormBuilder,
@@ -60,18 +61,11 @@ export class ConnectionComponent implements OnInit, OnDestroy {
     })
     this.connect$ = this.store.select(getConnectionToken).subscribe({
       next: data => {
+        console.log(`Page requested: ${data.page}`)
         if (data.valid) {
-          //TODO Find a better way to handle this
-          console.log(`data.label = ${data.label}`)
-          switch(data.label) {
-            case "DOCKER": {
-              this.router.navigate(["docker"]);
-              break;
-            }
-            default: {
-              this.router.navigate(["navigation"]);
-            }
-          }
+          this.router.navigate([`/${data.page}`]);
+        } else {
+          this.connectionError = data.description;
         }
       }
     })

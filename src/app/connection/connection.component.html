@@ -1,6 +1,7 @@
 <app-page title='Connection'>
     <form novalidate [formGroup]="connectionForm" class="group-width">
         <app-group title="Connect">
+            <div class="error">{{ connectionError }}</div>
             <ng-container *ngIf="connections && connections.length > 0; else noConnection">
                 <mat-form-field appearance="fill">
                     <mat-label>Available Connections</mat-label>
