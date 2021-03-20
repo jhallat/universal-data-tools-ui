@@ -1,3 +1,5 @@
+export const NO_CONNECION = 'NONE';
+
 export interface PropertyDefinition {
     propertyId: number;
     description: string;
@@ -6,7 +8,7 @@ export interface PropertyDefinition {
 }
 
 export interface ConnectionType {
-    id: number;
+    label: string;
     description: string;
     propertyDefinitions: PropertyDefinition[];
 }
@@ -18,9 +20,9 @@ export interface Property {
 
 export interface ConnectionDefinition {
     id: number;
-    typeId: number;
+    typeLabel: string;
     description: string;
-    properties: Property[]
+    properties: Property[];
 }
 
 export interface ConnectionToken {
@@ -37,4 +39,4 @@ export const EMPTY_CONNECTION_TOKEN: ConnectionToken = {
     type: '',
     page: '',
     valid: false
-}
+};

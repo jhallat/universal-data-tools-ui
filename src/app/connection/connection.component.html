@@ -31,7 +31,7 @@
                 <mat-form-field>
                     <mat-label>Connection Type</mat-label>
                     <mat-select formControlName="connectionType">
-                        <mat-option *ngFor="let type of connectionTypes" [value]="type.id">
+                        <mat-option *ngFor="let type of connectionTypes" [value]="type.label">
                             {{type.description}}
                         </mat-option>
                     </mat-select>
