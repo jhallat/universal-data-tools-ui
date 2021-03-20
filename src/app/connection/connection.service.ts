@@ -12,24 +12,24 @@ import { ConnectionDefinition, ConnectionToken, ConnectionType } from './connect
 })
 export class ConnectionService {
 
-  private urlDataSource = `${environment.apiUrl}/data-sources`; 
+  private urlDataSource = `${environment.apiUrl}/data-sources`;
 
   constructor(private http: HttpClient,
               private router: Router) { }
 
   getConnectionTypes(): Observable<ConnectionType[] | ServiceError> {
-    console.debug(`${this.urlDataSource}/types`);
+    console.log(`${this.urlDataSource}/types`);
     return this.http.get<ConnectionType[]>(`${this.urlDataSource}/types`)
     .pipe(
-      catchError(err => this.handleError(err,"An error occured retreiving connection types"))
-    )
+      catchError(err => this.handleError(err))
+    );
   }
 
   getConnections(): Observable<ConnectionDefinition[] | ServiceError> {
     return this.http.get<ConnectionDefinition[]>(`${this.urlDataSource}/connections`)
     .pipe(
-      catchError(err => this.handleError(err,"An error occured retreiving connections"))
-    )
+      catchError(err => this.handleError(err))
+    );
   }
 
   addConnection(connection: ConnectionDefinition): Observable<ConnectionDefinition | ServiceError > {
@@ -37,31 +37,31 @@ export class ConnectionService {
     return this.http.post<ConnectionDefinition>(`${this.urlDataSource}/connection`,
       connection)
     .pipe(
-      catchError(err => this.handleError(err,"An error occured adding connection"))
+      catchError(err => this.handleError(err))
     );
   }
 
   connect(connectionId: string): Observable<ConnectionToken | ServiceError > {
     return this.http.get<ConnectionToken>(`${this.urlDataSource}/connect/${connectionId}`)
     .pipe(
-      tap(data => window.localStorage.setItem("connection-token", data.token)),
-      catchError(err => this.handleError(err,"An error occured connecting to data source"))
-    )
+      tap(data => window.localStorage.setItem('connection-token', data.token)),
+      catchError(err => this.handleError(err))
+    );
   }
 
-  disconnect() {
-    console.log("Disconnecting");
-    const connectionToken = window.localStorage.getItem("connection-token");
+  disconnect(): void {
+    console.log('Disconnecting');
+    const connectionToken = window.localStorage.getItem('connection-token');
     this.http.put<void>(`${this.urlDataSource}/disconnect/${connectionToken}`, {})
       .subscribe().unsubscribe();
-    window.localStorage.setItem("connection-token", "");
+    window.localStorage.setItem('connection-token', '');
     this.router.navigate(['/connection']);
   }
 
-  private handleError(err: HttpErrorResponse, localMessage: string): Observable<ServiceError> {
-    let connectionError = new ServiceError(100, err.statusText, localMessage);
+  private handleError(err: HttpErrorResponse): Observable<ServiceError> {
+    const connectionError = new ServiceError(100, err.statusText, err.message);
     console.error(err.message);
-    window.localStorage.setItem("connection-token", "");
+    window.localStorage.setItem('connection-token', '');
     return throwError(connectionError);
   }
 

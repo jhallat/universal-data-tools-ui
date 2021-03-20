@@ -13,9 +13,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faDatabase } from '@fortawesome/free-solid-svg-icons';
 
-import { HomeComponent } from './home/home.component';
 import { ConnectionModule } from './connection/connection.module';
-import { NavigationModule } from './navigation/navigation.module';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { DockerModule } from './docker/docker.module';
 import { SharedModule } from './shared/shared.module';
@@ -26,7 +24,6 @@ import { DatabaseModule } from './database/database.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
   ],
   imports: [
     SharedModule,
@@ -38,7 +35,6 @@ import { DatabaseModule } from './database/database.module';
     ConnectionModule,
     DockerModule,
     DatabaseModule,
-    NavigationModule,
     TableModule,
     DataModule,
     AppRoutingModule,
