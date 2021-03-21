@@ -9,13 +9,18 @@ import { State } from '../state/app.state';
 @Injectable()
 export class AddConnectionHeaderInterceptor implements HttpInterceptor {
 
-    constructor() {}
+    connectionToken!: ConnectionToken;
+
+    constructor(private store: Store<State>) {
+      this.store.select(getConnectionToken).subscribe({
+        next: data => this.connectionToken = data
+      });
+    }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = window.localStorage.getItem('connection-token');
-        if (token != null) {
+        if (this.connectionToken != null) {
             const tokenRequest: HttpRequest<any> = req.clone({
-                setHeaders: { 'connection-token': token }
+                setHeaders: { 'connection-token': this.connectionToken.token }
             });
             return next.handle(tokenRequest);
         }

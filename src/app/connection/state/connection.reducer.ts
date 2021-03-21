@@ -9,7 +9,6 @@ export interface ConnectionState {
     currentConnectionLabel: string;
     connections: ConnectionDefinition[];
     connectionToken: ConnectionToken;
-    error: string;
 }
 
 const initialState: ConnectionState = {
@@ -17,7 +16,6 @@ const initialState: ConnectionState = {
     currentConnectionLabel: NO_CONNECION,
     connections: [],
     connectionToken: EMPTY_CONNECTION_TOKEN,
-    error: ''
 };
 
 const getConnectionState = createFeatureSelector<ConnectionState>('connection');
@@ -44,6 +42,7 @@ export const getConnectionToken = createSelector(
     state => state.connectionToken
 );
 
+
 export const connectionReducer = createReducer<ConnectionState>(
     initialState,
     on(ConnectionActions.loadConnectionTypesSuccess, (state, action): ConnectionState => {
@@ -52,22 +51,11 @@ export const connectionReducer = createReducer<ConnectionState>(
             connectionTypes: action.connectionTypes
         };
     }),
-    on(ConnectionActions.loadConnectionTypesFailure, (state, action): ConnectionState => {
-        return {
-            ...state,
-            error: action.error
-        };
-    }),
     on(ConnectionActions.loadConnectionsSuccess, (state, action): ConnectionState => {
-        return {
+      console.log(action.connectionDefinitions);
+      return {
             ...state,
-            connections: action.connectionDefinitions
-        };
-    }),
-    on(ConnectionActions.loadConnectionsFailure, (state, action): ConnectionState => {
-        return {
-            ...state,
-            error: action.error
+            connections: action.connectionDefinitions,
         };
     }),
     on(ConnectionActions.addConnectionSuccess, (state, action): ConnectionState => {
@@ -76,31 +64,19 @@ export const connectionReducer = createReducer<ConnectionState>(
         return {
             ...state,
             connections,
-            error: ''
-        };
-    }),
-    on(ConnectionActions.addConnectionFailure, (state, action): ConnectionState => {
-        return {
-            ...state,
-            error: action.error
         };
     }),
     on(ConnectionActions.connectSuccess, (state, action): ConnectionState => {
+        console.log('Connection token: ' + JSON.stringify(action.connectionToken));
         return {
             ...state,
-            connectionToken: action.connectionToken
-        };
-    }),
-    on(ConnectionActions.connectFailure, (state, action): ConnectionState => {
-        return {
-            ...state,
-            error: action.error
+            connectionToken: action.connectionToken,
         };
     }),
     on(ConnectionActions.disconnectSuccess, (state, action): ConnectionState => {
         return {
             ...state,
-            connectionToken: EMPTY_CONNECTION_TOKEN
+            connectionToken: EMPTY_CONNECTION_TOKEN,
         };
     })
 );

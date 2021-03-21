@@ -1,11 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { DockerContainer } from '../docker';
-import { getContainers, State } from '../state/docker.reducer';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Subscription} from 'rxjs';
+import {DockerContainer} from '../docker';
+import {getContainers, State} from '../state/docker.reducer';
 import * as DockerActions from '../state/docker.actions';
-import { DockerService } from '../docker.service';
-import {Menu, MenuBuilder, MenuItem} from '../../shared/page/menu';
+import {Menu, MenuBuilder} from '../../shared/page/menu';
+import {Router} from '@angular/router';
+import {getErrorCode} from '../../state/app.reducer';
+import {ErrorCode} from '../../shared';
 
 @Component({
   selector: 'app-docker-container',
@@ -17,10 +19,10 @@ export class DockerContainerComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['containerId', 'image', 'command', 'created', 'status', 'ports', 'names', 'actions'];
   containers: DockerContainer[] = [];
   containers$!: Subscription;
-
+  errorCode$!: Subscription;
   menus: Menu[] = [];
 
-  constructor(private store: Store<State>) { }
+  constructor(private store: Store<State>, private router: Router) { }
 
   ngOnInit(): void {
     this.menus = new MenuBuilder().forMenu('Container')
@@ -33,10 +35,19 @@ export class DockerContainerComponent implements OnInit, OnDestroy {
         this.containers = data;
       }
     });
+    this.errorCode$ = this.store.select(getErrorCode).subscribe({
+      next: data => {
+        console.log('Checking error code ' + data);
+        if (data === ErrorCode.NO_CONNECTION) {
+          this.router.navigate(['/error']);
+        }
+      }
+    });
   }
 
   ngOnDestroy(): void {
     this.containers$.unsubscribe();
+    this.errorCode$.unsubscribe();
   }
 
   onStart(containerId: string): void {

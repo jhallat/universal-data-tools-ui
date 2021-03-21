@@ -19,18 +19,21 @@ import { DockerModule } from './docker/docker.module';
 import { SharedModule } from './shared/shared.module';
 import { AddConnectionHeaderInterceptor } from './shared/add-connection-header.interceptor';
 import { DatabaseModule } from './database/database.module';
+import {errorReducer} from './state/app.reducer';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ErrorPageComponent,
   ],
   imports: [
     SharedModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({router: routerReducer}),
+    StoreModule.forRoot({router: routerReducer, error: errorReducer}),
     EffectsModule.forRoot([]),
     ConnectionModule,
     DockerModule,
