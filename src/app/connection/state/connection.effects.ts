@@ -5,6 +5,7 @@ import {failedApi, successApi} from 'src/app/shared';
 import {ConnectionDefinition, ConnectionToken, ConnectionType} from '../connection';
 import {ConnectionService} from '../connection.service';
 import * as ConnectionActions from './connection.actions';
+import {of} from 'rxjs';
 
 
 @Injectable()
@@ -49,7 +50,7 @@ export class ConnectionEffects {
       ofType(ConnectionActions.connect),
       switchMap((action) => this.connectionService.connect(action.connectionId).pipe(
         map(data => ConnectionActions.connectSuccess({connectionToken: data})),
-        catchError(error => failedApi(error))
+        catchError(error => of(ConnectionActions.connectFailure({ errorMessage: error.message})))
       ))
     );
   });

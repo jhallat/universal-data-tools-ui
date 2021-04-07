@@ -67,11 +67,18 @@ export const connectionReducer = createReducer<ConnectionState>(
         };
     }),
     on(ConnectionActions.connectSuccess, (state, action): ConnectionState => {
-        console.log('Connection token: ' + JSON.stringify(action.connectionToken));
+        console.log(action.connectionToken);
         return {
             ...state,
             connectionToken: action.connectionToken,
         };
+    }),
+    on(ConnectionActions.connectFailure, (state, action): ConnectionState => {
+      return {
+        ...state,
+        connectionToken: { ...EMPTY_CONNECTION_TOKEN,
+                           errorMessage: action.errorMessage}
+      };
     }),
     on(ConnectionActions.disconnectSuccess, (state, action): ConnectionState => {
         return {

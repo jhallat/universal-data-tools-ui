@@ -39,6 +39,10 @@ export class DockerContainerComponent implements OnInit, OnDestroy {
     this.store.dispatch(DockerActions.stopContainer({containerId}));
   }
 
+  onDelete(containerId: string): void {
+    this.store.dispatch(DockerActions.deleteContainer({containerId}));
+  }
+
   isRunning(status: string): boolean {
     return status.startsWith('Up');
   }

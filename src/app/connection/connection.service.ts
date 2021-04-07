@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { ConnectionDefinition, ConnectionToken, ConnectionType } from './connection';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,12 @@ export class ConnectionService {
   }
 
   connect(connectionId: string): Observable<ConnectionToken> {
-    return this.http.get<ConnectionToken>(`${this.urlDataSource}/connect/${connectionId}`);
+    return this.http.get<ConnectionToken>(`${this.urlDataSource}/connect/${connectionId}`).pipe(
+      tap(data => {
+        window.localStorage.setItem('connection-token', data.token);
+        window.localStorage.setItem('connection-description', data.description);
+      })
+    );
   }
 
   disconnect(): void {
@@ -38,6 +44,7 @@ export class ConnectionService {
     this.http.put<void>(`${this.urlDataSource}/disconnect/${connectionToken}`, {})
       .subscribe().unsubscribe();
     window.localStorage.setItem('connection-token', '');
+    window.localStorage.setItem('connection-description', '');
     this.router.navigate(['/connection']);
   }
 

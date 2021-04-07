@@ -73,4 +73,8 @@ export class ContainerCreateComponent implements OnInit {
     this.store.dispatch(DockerAction.createContainer({definition}));
     this.router.navigate(['containers']);
   }
+
+  onClickCancel(): void {
+    this.router.navigate(['containers']);
+  }
 }

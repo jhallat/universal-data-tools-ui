@@ -35,3 +35,13 @@ export const createContainerSuccess = createAction(
   '[Container API] Create Container Failure',
   props<{ container: DockerContainer }>()
 );
+
+export const deleteContainer = createAction(
+  '[Container Page] Delete Container',
+  props<{ containerId: string}>()
+);
+
+export const deleteContainerSuccess = createAction(
+  '[Container API] Delete Container Success',
+  props<{ containerId: string}>()
+);

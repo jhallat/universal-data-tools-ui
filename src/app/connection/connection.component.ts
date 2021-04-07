@@ -64,9 +64,10 @@ export class ConnectionComponent implements OnInit, OnDestroy {
       next: data => {
         console.log(`Page requested: ${data.page}`);
         if (data.valid) {
+          this.connectionError = '';
           this.router.navigate([`/${data.page}`]);
         } else {
-          this.connectionError = data.description;
+          this.connectionError = data.errorMessage;
         }
       }
     });

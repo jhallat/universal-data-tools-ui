@@ -42,6 +42,10 @@
                             (click)="onStart(container.containerId)">
                             <fa-icon [icon]="['fas', 'play']"></fa-icon>
                         </button>
+                      <button mat-icon-button matTooltip="Delete Container" aria-label="Delete container"
+                              (click)="onDelete(container.containerId)">
+                        <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
+                      </button>
                     </ng-template>
                 </td>
             </ng-container>

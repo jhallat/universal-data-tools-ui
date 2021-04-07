@@ -31,6 +31,10 @@ export class DockerService {
     return this.http.post<DockerContainer>(`${this.urlDocker}/container/create`, definition);
   }
 
+  deleteContainer(containerId: string): Observable<any> {
+    return this.http.delete(`${this.urlDocker}/container/${containerId}`);
+  }
+
   searchImages(search: string, officialOnly?: boolean, minimumRating?: number): Observable<SearchItem[]> {
     const params = new HttpParams();
     if (officialOnly) {

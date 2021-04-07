@@ -41,6 +41,16 @@ export class DockerEffects {
       );
   });
 
+  deleteDockerContainer$ = createEffect( () => {
+    return this.action$.pipe(
+      ofType(DockerActions.deleteContainer),
+      mergeMap((action) => this.dockerService.deleteContainer(action.containerId).pipe(
+        map(data => DockerActions.deleteContainerSuccess({containerId: action.containerId})),
+        catchError( error => failedApi(error))
+      ))
+    );
+  });
+
   createDockerContainer$ = createEffect(() => {
     return this.action$.pipe(
       ofType(DockerActions.createContainer),

@@ -31,12 +31,14 @@ export interface ConnectionToken {
     type: string;
     page: string;
     valid: boolean;
+    errorMessage: string;
 }
 
 export const EMPTY_CONNECTION_TOKEN: ConnectionToken = {
-    token: '',
-    description: '',
+    token: window.localStorage.getItem('connection-token') + '',
+    description: window.localStorage.getItem('connection-description') + '',
     type: '',
     page: '',
-    valid: false
+    valid: false,
+    errorMessage: ''
 };
