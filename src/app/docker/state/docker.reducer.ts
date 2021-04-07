@@ -39,4 +39,13 @@ export const dockerReducer = createReducer<DockerState>(
             containers: updatedContainers
         };
     }),
+    on(DockerActions.createContainerSuccess, (state, action): DockerState => {
+      const addedContainers = [];
+      state.containers.forEach(val => addedContainers.push(Object.assign({}, val)));
+      addedContainers.push(action.container);
+      return {
+        ...state,
+        containers: addedContainers
+      };
+    })
 );

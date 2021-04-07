@@ -1,3 +1,4 @@
+@import '../shared/style/layout/button-bar';
 
 :host {
     font-size: 1rem;
@@ -9,9 +10,7 @@
 
 
 .button-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+  @include button-bar;
 }
 
 .error {

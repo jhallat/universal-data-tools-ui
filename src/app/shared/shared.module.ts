@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTrashAlt, faEdit, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faChevronLeft, faTable, faPlug, faPlay, faStop } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faTable, faPlug, faPlay, faStop, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { MatButtonModule } from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
@@ -30,8 +32,10 @@ import { GroupComponent } from './group/group.component';
   exports: [
     CommonModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatSelectModule,
     MatInputModule,
+    MatListModule,
     MatTableModule,
     MatMenuModule,
     MatTooltipModule,
@@ -51,6 +55,7 @@ export class SharedModule {
       faTable,
       faPlug,
       faPlay,
+      faSearch,
       faStop);
   }
 }

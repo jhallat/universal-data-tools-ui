@@ -1,5 +1,5 @@
 <div class='page-header'>
-  <div>{{ title }}</div>
+  <div class="page-title">{{ title }}</div>
   <div *ngIf="menus">
     <ng-container *ngFor="let menu of menus">
       <button mat-button [matMenuTriggerFor]="pageMenu">{{menu.caption}}</button>

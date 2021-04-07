@@ -41,6 +41,16 @@ export class DockerEffects {
       );
   });
 
+  createDockerContainer$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(DockerActions.createContainer),
+      mergeMap( (action) => this.dockerService.createContainer(action.definition).pipe(
+        map( data => DockerActions.createContainerSuccess( {container: data})),
+        catchError( error => failedApi(error))
+      ))
+    );
+  });
+
   successApi$ = createEffect(() => {
     return this.action$.pipe(
       ofType(DockerActions.loadContainersSuccess,

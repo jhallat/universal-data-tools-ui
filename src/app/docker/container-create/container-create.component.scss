@@ -1,0 +1,55 @@
+@import '../../shared/style/layout/button-bar';
+@import '../../shared/style/layout/group';
+@import '../../shared/style/color/color';
+
+:host {
+  font-size: 1rem;
+}
+
+.element-margin {
+  margin-right: 30px;
+}
+.form-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.page-columns {
+  width: 100%;
+}
+
+.page-column {
+  width: 400px;
+  margin: auto;
+}
+
+
+.button-bar {
+  @include button-bar;
+}
+
+.map-field {
+  margin-right: 10px;
+}
+
+label {
+  font-size: 0.9rem;
+  color: $labelColor;
+  padding-bottom: 2px;
+}
+
+.search-image-dialog-background {
+  z-index: 2;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0, 0.2);
+}
+
+.search-image-dialog {
+  width: 600px;
+  margin: 300px auto auto;
+}

@@ -1,0 +1,48 @@
+<div class="page-columns">
+  <div class="page-column">
+    <app-group title="Create New Container">
+      <form novalidate [formGroup]="newContainerForm">
+        <div class="form-line">
+          <mat-form-field>
+            <mat-label>Image</mat-label>
+            <input matInput formControlName="image"/>
+          </mat-form-field>
+          <button mat-icon-button color='primary' (click)="onSearchImageDisplay()">
+            <fa-icon [icon]="['fas', 'search']"></fa-icon>
+          </button>
+        </div>
+        <div class="form-line">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name"/>
+          </mat-form-field>
+        </div>
+        <div class="form-line">
+          <label>Publish Ports</label>
+          <button mat-button color='primary' (click)="onClickAddPort()">Add Port</button>
+        </div>
+        <div class="form-line" formArrayName="ports" *ngFor="let port of ports.controls; let i=index">
+          <div [formGroupName]="i">
+            <mat-form-field class="map-field">
+              <mat-label>Private</mat-label>
+              <input matInput formControlName="privatePort"/>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Public</mat-label>
+              <input matInput formControlName="publicPort"/>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <div class="button-bar">
+        <button mat-button color="primary" (click)="onClickCreateContainer()">Create</button>
+        <button mat-button color="primary">Cancel</button>
+      </div>
+    </app-group>
+  </div>
+</div>
+<div class="search-image-dialog-background" [hidden]="!displaySearchDialog">
+  <div class="search-image-dialog">
+    <app-search-image (canceled)="onSearchImageCanceled()" (selected)="onSelectSearchImage($event)"></app-search-image>
+  </div>
+</div>

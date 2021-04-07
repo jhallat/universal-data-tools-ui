@@ -1,8 +1,9 @@
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {DockerContainer} from './docker';
+import {CreateContainerDef, DockerContainer, SearchItem} from './docker';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,20 @@ export class DockerService {
 
   }
 
+  createContainer(definition: CreateContainerDef): Observable<DockerContainer> {
+    return this.http.post<DockerContainer>(`${this.urlDocker}/container/create`, definition);
+  }
+
+  searchImages(search: string, officialOnly?: boolean, minimumRating?: number): Observable<SearchItem[]> {
+    const params = new HttpParams();
+    if (officialOnly) {
+      params.set('officialOnly', String(officialOnly));
+    }
+    if (minimumRating) {
+      params.set('minimumRating', String(minimumRating));
+    }
+    console.log(`${this.urlDocker}/images/search/${search}`);
+    return this.http.get<SearchItem[]>(`${this.urlDocker}/images/search/${search}`, {params});
+  }
 
  }

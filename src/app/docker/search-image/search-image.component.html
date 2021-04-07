@@ -1,0 +1,33 @@
+<div class="page-column">
+  <app-group title="Search Images">
+    <mat-form-field>
+      <mat-label>Search Name</mat-label>
+      <input matInput [(ngModel)]="search"/>
+    </mat-form-field>
+    <div class="form-line">
+      <div class="element-margin">
+        <mat-checkbox [(ngModel)]="officialOnly">Official Only</mat-checkbox>
+      </div>
+      <mat-form-field>
+        <mat-label>Minimum Star Rating</mat-label>
+        <input matInput [(ngModel)]="minimumRating"/>
+      </mat-form-field>
+    </div>
+    <div class="button-bar">
+      <button mat-button color='primary' (click)="onSearchImage()">Submit</button>
+      <button mat-button color='primary' (click)="onCancel()">Cancel</button>
+    </div>
+    <div class="list-box">
+      <div class="search-item" *ngFor="let searchItem of searchItems">
+        <div class="search-item-heading">
+          <div class="search-item-name" (click)="onSelect(searchItem.name)">{{ searchItem.name }}</div>
+          <div class="search-item-official">
+            <ng-container *ngIf="searchItem.official">Official</ng-container>
+          </div>
+          <div class="search-item-star-rating">Star Rating: {{searchItem.stars}}</div>
+        </div>
+        <div class="search-item-description">{{ searchItem.description }}</div>
+      </div>
+    </div>
+  </app-group>
+</div>

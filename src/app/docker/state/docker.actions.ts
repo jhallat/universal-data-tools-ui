@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { DockerContainer } from "../docker";
+import {CreateContainerDef, DockerContainer} from '../docker';
 import {ErrorCode} from '../../shared';
 
 export const loadContainers = createAction(
@@ -26,4 +26,12 @@ export const stopContainer = createAction(
     props<{ containerId: string }>()
 );
 
+export const createContainer = createAction(
+  '[Container Page] Create Container',
+  props<{ definition: CreateContainerDef}>()
+);
 
+export const createContainerSuccess = createAction(
+  '[Container API] Create Container Failure',
+  props<{ container: DockerContainer }>()
+);

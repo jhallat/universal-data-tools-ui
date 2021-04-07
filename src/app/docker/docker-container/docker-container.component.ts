@@ -4,10 +4,6 @@ import {Subscription} from 'rxjs';
 import {DockerContainer} from '../docker';
 import {getContainers, State} from '../state/docker.reducer';
 import * as DockerActions from '../state/docker.actions';
-import {Menu, MenuBuilder} from '../../shared/page/menu';
-import {Router} from '@angular/router';
-import {getErrorCode} from '../../state/app.reducer';
-import {ErrorCode} from '../../shared';
 
 @Component({
   selector: 'app-docker-container',
@@ -19,35 +15,20 @@ export class DockerContainerComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['containerId', 'image', 'command', 'created', 'status', 'ports', 'names', 'actions'];
   containers: DockerContainer[] = [];
   containers$!: Subscription;
-  errorCode$!: Subscription;
-  menus: Menu[] = [];
 
-  constructor(private store: Store<State>, private router: Router) { }
+  constructor(private store: Store<State>) { }
 
   ngOnInit(): void {
-    this.menus = new MenuBuilder().forMenu('Container')
-      .addItem('Create New Container')
-      .withAction(this.onCreateContainer)
-      .create();
     this.store.dispatch(DockerActions.loadContainers());
     this.containers$ = this.store.select(getContainers).subscribe({
       next: data => {
         this.containers = data;
       }
     });
-    this.errorCode$ = this.store.select(getErrorCode).subscribe({
-      next: data => {
-        console.log('Checking error code ' + data);
-        if (data === ErrorCode.NO_CONNECTION) {
-          this.router.navigate(['/error']);
-        }
-      }
-    });
   }
 
   ngOnDestroy(): void {
     this.containers$.unsubscribe();
-    this.errorCode$.unsubscribe();
   }
 
   onStart(containerId: string): void {
@@ -62,7 +43,4 @@ export class DockerContainerComponent implements OnInit, OnDestroy {
     return status.startsWith('Up');
   }
 
-  onCreateContainer(): void {
-    console.log('onCreateContainer() called');
-  }
 }
