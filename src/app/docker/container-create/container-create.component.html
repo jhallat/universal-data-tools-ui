@@ -18,7 +18,23 @@
           </mat-form-field>
         </div>
         <div class="form-line">
-          <label>Publish Ports</label>
+          <label>Environment Variables</label>
+          <button mat-button color='primary' (click)="onClickAddEnvironmentVariable()">Add Variable</button>
+        </div>
+        <div class="form-line" formArrayName="environmentVariables" *ngFor="let variable of environmentVariables.controls; let i=index">
+          <div [formGroupName]="i">
+            <mat-form-field class="map-field">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name"/>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Value</mat-label>
+              <input matInput formControlName="value"/>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-line">
+          <label>Port Binding</label>
           <button mat-button color='primary' (click)="onClickAddPort()">Add Port</button>
         </div>
         <div class="form-line" formArrayName="ports" *ngFor="let port of ports.controls; let i=index">
@@ -33,6 +49,23 @@
             </mat-form-field>
           </div>
         </div>
+        <div class="form-line">
+          <label>Volume Binding</label>
+          <button mat-button color='primary' (click)="onClickAddVolume()">Add Volume</button>
+        </div>
+        <div class="form-line" formArrayName="volumes" *ngFor="let volume of volumes.controls; let i=index">
+          <div [formGroupName]="i">
+            <mat-form-field class="map-field">
+              <mat-label>Target (Container)</mat-label>
+              <input matInput formControlName="target"/>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Source (Host)</mat-label>
+              <input matInput formControlName="source"/>
+            </mat-form-field>
+          </div>
+        </div>
+
       </form>
       <div class="button-bar">
         <button mat-button color="primary" (click)="onClickCreateContainer()">Create</button>

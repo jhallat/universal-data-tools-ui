@@ -21,6 +21,7 @@ export class DockerPageComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute, private store: Store<State>) { }
 
   ngOnInit(): void {
+    console.log('DockerPageComponenet.ngOnInit');
     this.menus = new MenuBuilder().forMenu('Container')
       .addItem('Create New Container')
       .withAction(this.onCreateContainer)
@@ -29,13 +30,6 @@ export class DockerPageComponent implements OnInit, OnDestroy {
     this.errorCode$ = this.store.select(getErrorCode).subscribe({
       next: data => {
         if (data === ErrorCode.NO_CONNECTION) {
-          this.router.navigate(['/error']);
-        }
-      }
-    });
-    this.store.select(getConnectionToken).subscribe({
-      next: token => {
-        if (token?.token == null || token?.token?.length === 0) {
           this.router.navigate(['/error']);
         }
       }

@@ -20,6 +20,14 @@ export class ContainerCreateComponent implements OnInit {
     return this.newContainerForm.get('ports') as FormArray;
   }
 
+  get volumes(): FormArray {
+    return this.newContainerForm.get('volumes') as FormArray;
+  }
+
+  get environmentVariables(): FormArray {
+    return this.newContainerForm.get('environmentVariables') as FormArray;
+  }
+
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private store: Store<State>) { }
@@ -28,7 +36,9 @@ export class ContainerCreateComponent implements OnInit {
     this.newContainerForm = this.formBuilder.group({
         image: '',
         name: '',
-        ports: this.formBuilder.array([this.buildPortField(0, 0)])
+        ports: this.formBuilder.array([this.buildPortField(0, 0)]),
+        volumes: this.formBuilder.array([this.buildVolumeField('', '')]),
+        environmentVariables: this.formBuilder.array([this.buildEnvironmentVariableField('', '')])
     });
   }
 
@@ -37,10 +47,34 @@ export class ContainerCreateComponent implements OnInit {
     propertyArray.push(this.buildPortField(0, 0));
   }
 
+  addVolumeField(): void {
+    const propertyArray = this.newContainerForm.get('volumes') as FormArray;
+    propertyArray.push(this.buildVolumeField('', ''));
+  }
+
+  addEnvironmentVariableField(): void {
+    const propertyArray = this.newContainerForm.get('environmentVariables') as FormArray;
+    propertyArray.push(this.buildEnvironmentVariableField('', ''));
+  }
+
   buildPortField(privatePort: number, publicPort: number): FormGroup {
     return this.formBuilder.group({
       privatePort,
       publicPort
+    });
+  }
+
+  buildVolumeField(source: string, target: string): FormGroup {
+    return this.formBuilder.group({
+      source,
+      target
+    });
+  }
+
+  buildEnvironmentVariableField(name: string, value: string): FormGroup {
+    return this.formBuilder.group({
+      name,
+      value
     });
   }
 
@@ -61,6 +95,14 @@ export class ContainerCreateComponent implements OnInit {
     this.addPortField();
   }
 
+  onClickAddVolume(): void {
+    this.addVolumeField();
+  }
+
+  onClickAddEnvironmentVariable(): void {
+    this.addEnvironmentVariableField();
+  }
+
   onClickCreateContainer(): void {
     const definition = new CreateContainerDef();
     definition.image = this.newContainerForm.get('image')?.value + '';
@@ -69,6 +111,17 @@ export class ContainerCreateComponent implements OnInit {
       const privatePort = port.get('privatePort') !== null ? port.get('privatePort')?.value : 0;
       const publicPort = port.get('publicPort') !== null ? port.get('publicPort')?.value : 0;
       definition.publishedPorts.push({ privatePort, publicPort});
+    }
+    for (const volume of this.volumes.controls) {
+      const source = volume.get('source') !== null ? volume.get('source')?.value : '';
+      const target = volume.get('target') !== null ? volume.get('target')?.value : '';
+      definition.volumes.push({ source, target});
+    }
+    for (const variable of this.environmentVariables.controls) {
+      const name = variable.get('name') !== null ? variable.get('name')?.value : '';
+      const value = variable.get('value') !== null ? variable.get('value')?.value : '';
+      console.log(`variable = ${name}:${value}`);
+      definition.environmentVariables.push({ name, value});
     }
     this.store.dispatch(DockerAction.createContainer({definition}));
     this.router.navigate(['containers']);

@@ -20,8 +20,20 @@ export interface PublishedPort {
   publicPort: string;
 }
 
+export interface Volume {
+  source: string;
+  target: string;
+}
+
+export interface EnvironmentVariable {
+  name: string;
+  value: string;
+}
+
 export class CreateContainerDef {
   image = '';
   name = '';
   publishedPorts: PublishedPort[] = [];
+  volumes: Volume[] = [];
+  environmentVariables: EnvironmentVariable[] = [];
 }
