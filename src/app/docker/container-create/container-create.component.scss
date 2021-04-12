@@ -1,5 +1,6 @@
 @import '../../shared/style/layout/button-bar';
 @import '../../shared/style/layout/group';
+@import '../../shared/style/layout/input';
 @import '../../shared/style/color/color';
 
 :host {
@@ -20,10 +21,13 @@
 }
 
 .page-column {
-  width: 500px;
+  width: 600px;
   margin: auto;
 }
 
+.section-margin {
+  margin-top: 20px;
+}
 
 .button-bar {
   @include button-bar;
@@ -37,6 +41,10 @@ label {
   font-size: 0.9rem;
   color: $labelColor;
   padding-bottom: 2px;
+}
+
+.field-volume {
+  @include field-large;
 }
 
 .search-image-dialog-background {

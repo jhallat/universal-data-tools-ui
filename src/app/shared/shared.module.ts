@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTrashAlt, faEdit, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faChevronLeft, faTable, faPlug, faPlay, faStop, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faTable, faPlug, faPlay, faStop, faSearch, faTools} from '@fortawesome/free-solid-svg-icons';
 
 import { MatButtonModule } from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -56,6 +56,7 @@ export class SharedModule {
       faPlug,
       faPlay,
       faSearch,
-      faStop);
+      faStop,
+      faTools);
   }
 }

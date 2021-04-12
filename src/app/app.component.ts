@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { getConnectionToken } from './connection/state';
 import { State } from './state/app.state';
 import * as ConnectionActions from './connection/state/connection.actions';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
 
   connection = '';
 
-  constructor(private store: Store<State>) { }
+  constructor(private store: Store<State>,
+              private router: Router) { }
 
   ngOnInit(): void {
 
@@ -31,4 +33,9 @@ export class AppComponent implements OnInit {
   disconnect(): void {
     this.store.dispatch(ConnectionActions.disconnect());
   }
+
+  displayLogs(): void {
+    this.router.navigate(['/logs']);
+  }
+
 }

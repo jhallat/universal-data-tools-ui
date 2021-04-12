@@ -4,12 +4,20 @@
       <fa-icon [icon]="['fas', 'database']"></fa-icon>
       Universal Data Tools
     </div>
-    <div *ngIf="connection.length > 0">
-      <button mat-button [matMenuTriggerFor]="connectionMenu">
-        <fa-icon [icon]="['fas', 'plug']"></fa-icon>&nbsp;{{ connection }}
+    <div class="button-bar">
+      <div *ngIf="connection.length > 0">
+        <button mat-button [matMenuTriggerFor]="connectionMenu">
+          <fa-icon [icon]="['fas', 'plug']"></fa-icon>&nbsp;{{ connection }}
+        </button>
+        <mat-menu #connectionMenu="matMenu">
+          <button mat-menu-item (click)="disconnect()">Close Connection</button>
+        </mat-menu>
+      </div>
+      <button mat-button [matMenuTriggerFor]="toolMenu">
+        <fa-icon [icon]="['fas', 'tools']"></fa-icon>
       </button>
-      <mat-menu #connectionMenu="matMenu">
-        <button mat-menu-item (click)="disconnect()">Close Connection</button>
+      <mat-menu #toolMenu="matMenu">
+        <button mat-menu-item (click)="displayLogs()">Display Logs</button>
       </mat-menu>
     </div>
   </div>

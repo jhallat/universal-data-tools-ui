@@ -17,7 +17,8 @@
             <input matInput formControlName="name"/>
           </mat-form-field>
         </div>
-        <div class="form-line">
+
+        <div class="form-line section-margin">
           <label>Environment Variables</label>
           <button mat-button color='primary' (click)="onClickAddEnvironmentVariable()">Add Variable</button>
         </div>
@@ -33,7 +34,8 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="form-line">
+
+        <div class="form-line section-margin">
           <label>Port Binding</label>
           <button mat-button color='primary' (click)="onClickAddPort()">Add Port</button>
         </div>
@@ -49,17 +51,18 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="form-line">
+
+        <div class="form-line section-margin">
           <label>Volume Binding</label>
           <button mat-button color='primary' (click)="onClickAddVolume()">Add Volume</button>
         </div>
         <div class="form-line" formArrayName="volumes" *ngFor="let volume of volumes.controls; let i=index">
           <div [formGroupName]="i">
-            <mat-form-field class="map-field">
+            <mat-form-field class="map-field field-volume">
               <mat-label>Target (Container)</mat-label>
               <input matInput formControlName="target"/>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field class='field-volume'>
               <mat-label>Source (Host)</mat-label>
               <input matInput formControlName="source"/>
             </mat-form-field>

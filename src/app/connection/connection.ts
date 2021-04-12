@@ -39,6 +39,6 @@ export const EMPTY_CONNECTION_TOKEN: ConnectionToken = {
     description: window.localStorage.getItem('connection-description') + '',
     type: '',
     page: '',
-    valid: false,
+    valid: window.localStorage.getItem('connection-token') !== null && window.localStorage.getItem('connection-token') !== '',
     errorMessage: ''
 };

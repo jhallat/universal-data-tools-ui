@@ -21,6 +21,9 @@ import { AddConnectionHeaderInterceptor } from './shared/add-connection-header.i
 import { DatabaseModule } from './database/database.module';
 import {errorReducer} from './state/app.reducer';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { environment } from '../environments/environment';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {LogModule} from './log/log.module';
 
 
 @NgModule({
@@ -40,9 +43,11 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     DatabaseModule,
     TableModule,
     DataModule,
+    LogModule,
     AppRoutingModule,
     FontAwesomeModule,
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AddConnectionHeaderInterceptor, multi: true}

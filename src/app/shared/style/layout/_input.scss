@@ -1,0 +1,11 @@
+@mixin field-small {
+  width: 50px;
+}
+
+@mixin field-medium {
+  width: 150px;
+}
+
+@mixin field-large {
+  width: 250px;
+}
