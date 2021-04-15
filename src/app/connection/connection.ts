@@ -1,7 +1,7 @@
 export const NO_CONNECION = 'NONE';
 
 export interface PropertyDefinition {
-    propertyId: number;
+    id: number;
     description: string;
     required: boolean;
     masked: boolean;

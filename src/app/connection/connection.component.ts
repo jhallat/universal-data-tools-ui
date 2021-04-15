@@ -94,16 +94,17 @@ export class ConnectionComponent implements OnInit, OnDestroy {
   }
 
   buildProperty(propertyDefinition: PropertyDefinition, value: string): FormGroup {
+    console.log(`Property Definition: ${JSON.stringify(propertyDefinition)}`);
     if (propertyDefinition.required) {
       return this.formBuilder.group({
-        propertyId: [propertyDefinition.propertyId],
+        propertyId: [propertyDefinition.id],
         property: [propertyDefinition.description],
         masked: [propertyDefinition.masked],
         value: [value, Validators.required]
       });
     }
     return this.formBuilder.group({
-      propertyId: [propertyDefinition.propertyId],
+      propertyId: [propertyDefinition.id],
       property: [propertyDefinition.description],
       masked: [propertyDefinition.masked],
       value
@@ -132,6 +133,7 @@ export class ConnectionComponent implements OnInit, OnDestroy {
         };
         properties.push(property);
       }
+      console.log(properties);
 
       const connection: ConnectionDefinition = {
         id: 0,
