@@ -1,0 +1,9 @@
+<div class="leaf">
+  <ng-container *ngIf="!last">
+    <div class="leaf-icon">&#x251C;</div>
+  </ng-container>
+  <ng-container *ngIf="last">
+    <div class="leaf-icon">&#x2514;</div>
+  </ng-container>
+  <div>{{ caption }}</div>
+</div>

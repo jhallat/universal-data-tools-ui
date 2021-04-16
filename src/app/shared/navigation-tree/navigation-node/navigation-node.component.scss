@@ -1,0 +1,22 @@
+@import '../../../shared/style/color/color';
+
+.node {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.node-icon {
+  margin-right: 5px;
+}
+
+.node-children {
+  margin-left: 15px;
+}
+
+.node-root {
+  color: $labelColor;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
