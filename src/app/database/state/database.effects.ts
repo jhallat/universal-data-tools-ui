@@ -24,7 +24,7 @@ export class DatabaseEffects {
   loadTable$ = createEffect(() => {
     return this.action$.pipe(
       ofType(DatabaseActions.loadTable),
-      mergeMap((action) => this.databaseService.getTable(action.schema, action.table).pipe(
+      mergeMap((action) => this.databaseService.getTable(action.database, action.schema, action.table).pipe(
         map(data => DatabaseActions.loadTableSuccess({table: data})),
         catchError(error => failedApi(error))
       ))

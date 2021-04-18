@@ -12,7 +12,7 @@ export const loadDatabasesSuccess = createAction(
 
 export const loadTable = createAction(
   '[Database Page] Load Table',
-  props<{ schema: string, table: string }>()
+  props<{ database: string, schema: string, table: string }>()
 );
 
 export const loadTableSuccess = createAction(

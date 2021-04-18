@@ -12,6 +12,7 @@ import {Subscription} from 'rxjs';
 export class DatabaseTableComponent implements OnInit {
 
   displayedDefColumns: string[] = ['name',
+    'isPrimaryKey',
     'isNullable',
     'defaultValue',
     'dataType',
@@ -26,12 +27,16 @@ export class DatabaseTableComponent implements OnInit {
   columns: ColumnDef[] = [];
   columns$!: Subscription;
   dataRows: any[] = [];
+  primaryKey = '';
 
   constructor(private store: Store<State>) { }
 
   ngOnInit(): void {
     this.columns$ = this.store.select(getSelectedTable).subscribe({
       next: data => {
+        if (data?.primaryKey !== undefined) {
+          this.primaryKey = data.primaryKey;
+        }
         if (data?.columns !== undefined) {
           this.columns = data?.columns;
           this.displayedDataColumns = this.columns.map(column => column.name);

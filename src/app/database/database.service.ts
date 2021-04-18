@@ -17,7 +17,7 @@ export class DatabaseService {
     return this.http.get<DatabaseDef[]>(`${this.urlDatabases}/databases`);
   }
 
-  getTable(schema: string, table: string): Observable<TableDef> {
-    return this.http.get<TableDef>(`${this.urlDatabases}/database/table/${schema}/${table}`);
+  getTable(database: string, schema: string, table: string): Observable<TableDef> {
+    return this.http.get<TableDef>(`${this.urlDatabases}/database/table/${database}/${schema}/${table}`);
   }
 }

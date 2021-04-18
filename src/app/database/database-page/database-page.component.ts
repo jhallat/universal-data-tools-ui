@@ -43,18 +43,18 @@ export class DatabasePageComponent implements OnInit, OnDestroy {
   }
 
   private buildNavigationTree(databases: DatabaseDef[]): void {
-    const builder = new NavigationTreeBuilder<{schema: string, type: string, name: string}>();
+    const builder = new NavigationTreeBuilder<{database: string, schema: string, type: string, name: string}>();
     for (const database of databases) {
       builder.forRoot(database.name)
              .addNode('Tables');
       for (const table of database.tables) {
         builder.addLeaf(table.name)
-               .withData({schema: table.schema, type: 'table', name: table.name});
+               .withData({database: database.name, schema: table.schema, type: 'table', name: table.name});
       }
       builder.addNode('Views');
       for (const view of database.views) {
         builder.addLeaf(view.name)
-          .withData({schema: view.name, type: 'view', name: view.name});
+          .withData({database: database.name, schema: view.schema, type: 'view', name: view.name});
       }
     }
     this.dbNodes = builder.create();
@@ -62,7 +62,7 @@ export class DatabasePageComponent implements OnInit, OnDestroy {
 
   onNodeSelected(data: any): void {
     console.log(`selected data = ${JSON.stringify(data)}`);
-    this.store.dispatch(DatabaseActions.loadTable({schema: data.schema, table: data.name}));
+    this.store.dispatch(DatabaseActions.loadTable({database: data.database, schema: data.schema, table: data.name}));
   }
 
   ngOnDestroy(): void {

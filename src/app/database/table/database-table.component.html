@@ -14,7 +14,18 @@
     <table mat-table [dataSource]="columns" class="mat-elevation-z2">
       <ng-container matColumnDef="name">
         <th class="table-cell" mat-header-cell *matHeaderCellDef>Name</th>
-        <td class="table-cell name-cell" mat-cell *matCellDef="let column">{{ column.name }}</td>
+        <td class="table-cell name-cell"  mat-cell *matCellDef="let column">{{ column.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="isPrimaryKey">
+        <th class="table-cell" mat-header-cell *matHeaderCellDef>Primary Key</th>
+        <td class="table-cell primary-key-cell" mat-cell *matCellDef="let column">
+          <ng-container *ngIf="column.name === primaryKey">
+            <fa-icon [icon]="['far', 'check-square']"></fa-icon>&nbsp;
+          </ng-container>
+          <ng-container *ngIf="column.name !== primaryKey">
+            <fa-icon [icon]="['far', 'square']"></fa-icon>&nbsp;
+          </ng-container>
+        </td>
       </ng-container>
       <ng-container matColumnDef="isNullable">
         <th class="table-cell" mat-header-cell *matHeaderCellDef>Nullable</th>
