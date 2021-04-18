@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NavigationNode} from '../navigation-tree';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {LeafNode, NavigationNode} from '../navigation-tree';
 
 @Component({
   selector: 'app-navigation-leaf',
@@ -14,6 +14,9 @@ export class NavigationLeafComponent implements OnInit {
   @Input()
   last = false;
 
+  @Output()
+  selected = new EventEmitter<any>();
+
   get caption(): string {
     if (this.node === undefined) {
       return '';
@@ -26,4 +29,10 @@ export class NavigationLeafComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClick(): void {
+    if (this.node?.isLeaf) {
+      const leaf = this.node as LeafNode<any>;
+      this.selected.emit(leaf.data);
+    }
+  }
 }

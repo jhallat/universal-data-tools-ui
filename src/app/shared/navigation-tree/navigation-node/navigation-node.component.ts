@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NavigationNode} from '../navigation-tree';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {BranchNode, NavigationNode} from '../navigation-tree';
 
 @Component({
   selector: 'app-navigation-node',
@@ -14,6 +14,9 @@ export class NavigationNodeComponent implements OnInit {
   @Input()
   root = false;
 
+  @Output()
+  selected = new EventEmitter<any>();
+
   get caption(): string {
     if (this.node === undefined) {
       return '';
@@ -22,17 +25,18 @@ export class NavigationNodeComponent implements OnInit {
   }
 
   get nodes(): NavigationNode[] {
-    if (this.node === undefined) {
+    if (this.node === undefined || this.node.isLeaf) {
       return [];
     }
-    return this.node.nodes;
+    const branch = this.node as BranchNode;
+    return branch.nodes;
   }
 
   get isLeaf(): boolean {
     if (this.node === undefined) {
       return true;
     }
-    return this.node.leaf;
+    return this.node.isLeaf;
   }
 
   opened = false;
@@ -44,5 +48,9 @@ export class NavigationNodeComponent implements OnInit {
 
   onToggle(): void {
     this.opened = !this.opened;
+  }
+
+  onSelected(data: any): void {
+    this.selected.emit(data);
   }
 }

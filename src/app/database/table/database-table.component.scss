@@ -1,0 +1,58 @@
+@import '../../shared/style/color/color';
+
+.table-container {
+  height: 100%;
+  overflow: auto;
+}
+.button-bar {
+  padding-top: 10px;
+}
+
+.tab-button {
+  background-color: lighten($highlightColor, 12%);
+  border-radius: 15px 5px 0 0;
+  width: 90px;
+}
+
+.selected {
+  border-bottom: 2px solid lighten($borderColor, 10%);
+  background-color: lighten($highlightColor, 10%);
+  border-radius: 15px 5px 0 0;
+}
+
+.name-cell {
+  min-width: 150px;
+  font-weight: bold;
+}
+
+.nullable-cell {
+  width: 50px;
+}
+
+.default-cell {
+  min-width: 75px;
+}
+
+.data-type-cell {
+  min-width: 75px;
+}
+
+.max-length-cell {
+  min-width: 75px;
+}
+
+.numeric-precision-cell {
+  min-width: 75px;
+}
+
+.numeric-scale-cell {
+  min-width: 75px;
+}
+
+.updatable-cell {
+  min-width: 50px;
+}
+
+.data-cell {
+  padding-right: 10px;
+}

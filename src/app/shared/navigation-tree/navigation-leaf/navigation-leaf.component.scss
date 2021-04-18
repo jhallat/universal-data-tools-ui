@@ -1,9 +1,26 @@
+@import '../../../shared/style/color/color';
+
 .leaf {
   display: flex;
   flex-direction: row;
   cursor: pointer;
+  padding: 0px;
+}
+
+.leaf-caption {
+  padding-left: 3px;
+  padding-right: 3px;
+  border-radius: 3px;
+  &:hover {
+    background-color: $highlightColor;
+  }
+  &:active:hover {
+    color: #444444;
+    background-color: darken($highlightColor, 15%);
+  }
 }
 
 .leaf-icon {
   margin-right: 5px;
+  color: lighten($borderColor, 20%);
 }

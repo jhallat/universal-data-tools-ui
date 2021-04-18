@@ -8,7 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class GroupComponent implements OnInit {
 
   @Input()
-  title = "";
+  title = '';
+
+  @Input()
+  fullHeight = false;
 
   constructor() { }
 

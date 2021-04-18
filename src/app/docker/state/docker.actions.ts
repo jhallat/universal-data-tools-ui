@@ -1,6 +1,5 @@
-import { createAction, props } from "@ngrx/store";
+import { createAction, props } from '@ngrx/store';
 import {CreateContainerDef, DockerContainer} from '../docker';
-import {ErrorCode} from '../../shared';
 
 export const loadContainers = createAction(
     '[Container Page] Load Containers'

@@ -1,0 +1,21 @@
+.database-page {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.database-table {
+  margin-left: 30px;
+  height: 100%;
+  width: 100%;
+}
+
+.database-navigation {
+  height: 100%;
+  width: 250px;
+}
+
+.navigation-tree {
+  overflow: auto;
+}

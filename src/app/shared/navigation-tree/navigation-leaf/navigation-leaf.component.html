@@ -5,5 +5,5 @@
   <ng-container *ngIf="last">
     <div class="leaf-icon">&#x2514;</div>
   </ng-container>
-  <div>{{ caption }}</div>
+  <div class="leaf-caption" (click)="onClick()">{{ caption }}</div>
 </div>

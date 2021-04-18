@@ -21,7 +21,6 @@ export class DockerPageComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute, private store: Store<State>) { }
 
   ngOnInit(): void {
-    console.log('DockerPageComponenet.ngOnInit');
     this.menus = new MenuBuilder().forMenu('Container')
       .addItem('Create New Container')
       .withAction(this.onCreateContainer)

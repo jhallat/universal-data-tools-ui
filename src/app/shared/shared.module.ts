@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faTrashAlt, faEdit, faPlusSquare, faMinusSquare } from '@fortawesome/free-regular-svg-icons';
+import { faTrashAlt, faEdit, faPlusSquare, faMinusSquare , faSquare, faCheckSquare} from '@fortawesome/free-regular-svg-icons';
 import { faChevronLeft, faTable, faPlug, faPlay, faStop, faSearch, faTools} from '@fortawesome/free-solid-svg-icons';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -13,7 +13,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { DivisionComponent } from './division/division.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -41,6 +42,7 @@ import { NavigationLeafComponent } from './navigation-tree/navigation-leaf/navig
         MatListModule,
         MatTableModule,
         MatMenuModule,
+        MatTabsModule,
         MatTooltipModule,
         FontAwesomeModule,
         DivisionComponent,
@@ -62,6 +64,8 @@ export class SharedModule {
       faPlay,
       faSearch,
       faStop,
-      faTools);
+      faTools,
+      faSquare,
+      faCheckSquare);
   }
 }

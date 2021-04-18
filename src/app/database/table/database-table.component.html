@@ -1,0 +1,78 @@
+<app-group title="Table" [fullHeight]="true">
+  <div>{{ tableName }}</div>
+
+  <div class="button-bar">
+    <button mat-button color="primary" class="tab-button" [ngClass]="{'selected': selectedTab==='definition'}"
+            (click)="onSelectTab('definition')">Definition
+    </button>
+    <button mat-button color="primary" class="tab-button" [ngClass]="{'selected': selectedTab==='data'}"
+            (click)="onSelectTab('data')">Data
+    </button>
+  </div>
+
+  <div *ngIf="selectedTab === 'definition'" class="table-container">
+    <table mat-table [dataSource]="columns" class="mat-elevation-z2">
+      <ng-container matColumnDef="name">
+        <th class="table-cell" mat-header-cell *matHeaderCellDef>Name</th>
+        <td class="table-cell name-cell" mat-cell *matCellDef="let column">{{ column.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="isNullable">
+        <th class="table-cell" mat-header-cell *matHeaderCellDef>Nullable</th>
+        <td class="table-cell nullable-cell" mat-cell *matCellDef="let column">
+          <ng-container *ngIf="column.isNullable">
+            <fa-icon [icon]="['far', 'check-square']"></fa-icon>&nbsp;
+          </ng-container>
+          <ng-container *ngIf="!column.isNullable">
+            <fa-icon [icon]="['far', 'square']"></fa-icon>&nbsp;
+          </ng-container>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="defaultValue">
+        <th class="table-cell" mat-header-cell *matHeaderCellDef>Default</th>
+        <td class="table-cell default-cell" mat-cell *matCellDef="let column">{{ column.defaultValue }}</td>
+      </ng-container>
+      <ng-container matColumnDef="dataType">
+        <th class="table-cell" mat-header-cell *matHeaderCellDef>Type</th>
+        <td class="table-cell data-type-cell" mat-cell *matCellDef="let column">{{ column.dataType }}</td>
+      </ng-container>
+      <ng-container matColumnDef="maxLength">
+        <th class="table-cell" mat-header-cell *matHeaderCellDef>Max Length</th>
+        <td class="table-cell max-length-cell" mat-cell *matCellDef="let column">{{ column.maxLength }}</td>
+      </ng-container>
+      <ng-container matColumnDef="numericPrecision">
+        <th class="table-cell" mat-header-cell *matHeaderCellDef>Precision</th>
+        <td class="table-cell numeric-precision-cell" mat-cell
+            *matCellDef="let column">{{ column.numericPrecision }}</td>
+      </ng-container>
+      <ng-container matColumnDef="numericScale">
+        <th class="table-cell" mat-header-cell *matHeaderCellDef>Scale</th>
+        <td class="table-cell numeric-scale-cell" mat-cell *matCellDef="let column">{{ column.numericScale }}</td>
+      </ng-container>
+      <ng-container matColumnDef="updatable">
+        <th class="table-cell" mat-header-cell *matHeaderCellDef>Updatabale</th>
+        <td class="table-cell updatable-cell" mat-cell *matCellDef="let column">
+          <ng-container *ngIf="column.updatable">
+            <fa-icon [icon]="['far', 'check-square']"></fa-icon>&nbsp;
+          </ng-container>
+          <ng-container *ngIf="!column.updatable">
+            <fa-icon [icon]="['far', 'square']"></fa-icon>&nbsp;
+          </ng-container>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedDefColumns, sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedDefColumns;"></tr>
+    </table>
+  </div>
+  <div *ngIf="selectedTab === 'data'" class="table-container">
+    <table mat-table [dataSource]="dataRows" class="mat-elevation-z2">
+      <ng-container *ngFor="let columnName of displayedDataColumns">
+        <ng-container matColumnDef="{{ columnName }}">
+          <th class="table-cell data-cell" mat-header-cell *matHeaderCellDef>{{ columnName }}</th>
+          <td class="table-cell data-cell" mat-cell *matCellDef="let value">{{ value[columnName] }}</td>
+        </ng-container>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedDataColumns, sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedDataColumns;"></tr>
+    </table>
+  </div>
+</app-group>

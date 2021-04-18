@@ -1,19 +1,24 @@
 <div class="node" (click)="onToggle()">
   <ng-container *ngIf="!opened">
-    <div class="node-icon"><fa-icon [icon]="['far', 'plus-square']"></fa-icon></div>
+    <div class="node-icon">
+      <fa-icon [icon]="['far', 'plus-square']"></fa-icon>
+    </div>
   </ng-container>
   <ng-container *ngIf="opened">
-    <div class="node-icon"><fa-icon [icon]="['far', 'minus-square']"></fa-icon></div>
+    <div class="node-icon">
+      <fa-icon [icon]="['far', 'minus-square']"></fa-icon>
+    </div>
   </ng-container>
   <div [ngClass]="{'node-root': root}">{{ caption }}</div>
 </div>
 <div *ngIf="opened" class="node-children">
   <ng-container *ngFor="let node of nodes; let nodeIndex = index">
-    <ng-container *ngIf="!node.leaf">
-      <app-navigation-node [node]="node"></app-navigation-node>
+    <ng-container *ngIf="!node.isLeaf">
+      <app-navigation-node [node]="node" (selected)="onSelected($event)"></app-navigation-node>
     </ng-container>
-    <ng-container *ngIf="node.leaf">
-      <app-navigation-leaf [node]="node" [last]="nodeIndex === nodes.length - 1"></app-navigation-leaf>
+    <ng-container *ngIf="node.isLeaf">
+      <app-navigation-leaf [node]="node" [last]="nodeIndex === nodes.length - 1" (selected)="onSelected($event)">
+      </app-navigation-leaf>
     </ng-container>
   </ng-container>
 </div>

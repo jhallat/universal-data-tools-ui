@@ -4,6 +4,15 @@
 
 @include mat-core();
 
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+}
+
 /* For use in src/lib/core/theming/_palette.scss */
 $md-udtaccent: (
     50 : #fdf9f3,

@@ -1,3 +1,14 @@
 <app-page [title]='title'>
-  <app-navigation-tree [rootNodes]="dbNodes"></app-navigation-tree>
+  <div class="database-page">
+    <div class="database-navigation">
+      <app-group title='Databases' [fullHeight]="true">
+        <div class="navigation-tree">
+          <app-navigation-tree [rootNodes]="dbNodes" (selected)="onNodeSelected($event)"></app-navigation-tree>
+        </div>
+      </app-group>
+    </div>
+    <div *ngIf="tableSelected" class="database-table">
+      <app-database-table></app-database-table>
+    </div>
+  </div>
 </app-page>

@@ -1,3 +1,4 @@
 <div *ngFor="let node of rootNodes">
-  <app-navigation-node [node]="node" [root]="true"></app-navigation-node>
+  <app-navigation-node [node]="node" [root]="true" (selected)="onSelected($event)"></app-navigation-node>
 </div>
+
