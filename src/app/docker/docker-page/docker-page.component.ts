@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Menu, MenuBuilder} from '../../shared/page/menu';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+// TODO getErrorCode from Docker reducer !!!
 import {getErrorCode} from '../../state/app.reducer';
 import {ErrorCode} from '../../shared';
 import {Store} from '@ngrx/store';
 import {State} from '../state/docker.reducer';
-import {getConnectionToken} from '../../connection/state';
+
 
 @Component({
   selector: 'app-docker-page',

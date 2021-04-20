@@ -1,0 +1,63 @@
+<app-group title="Create Table" [fullHeight]="true">
+  <form novalidate [formGroup]="newTableForm">
+    <div class="form-row">
+      <div class="form-input">
+        <mat-form-field>
+          <mat-label>Database</mat-label>
+          <mat-select formControlName="database">
+            <mat-option *ngFor="let database of databases" [value]="database">
+              {{database}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-input">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name"/>
+        </mat-form-field>
+      </div>
+      <button mat-button color="primary" (click)="onCreate()">Create</button>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th class="table-heading">Name</th>
+        <th class="table-heading">Data Type</th>
+        <th class="table-heading">Size</th>
+        <th class="table-heading">Primary Key</th>
+        <th class="table-heading">Not Null</th>
+        <th class="table-heading">Unique</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="table-data-row" formArrayName="columns" *ngFor="let col of columns.controls; let i=index">
+        <ng-container [formGroupName]="i">
+          <td>
+            <input formControlName="name"/>
+          </td>
+          <td>
+            <select formControlName="dataType">
+              <option>int</option>
+              <option>serial</option>
+              <option>varchar</option>
+            </select>
+          </td>
+          <td>
+            <input formControlName="size">
+          </td>
+          <td>
+            <mat-checkbox formControlName="primaryKey"></mat-checkbox>
+          </td>
+          <td>
+            <mat-checkbox formControlName="notNull"></mat-checkbox>
+          </td>
+          <td>
+            <mat-checkbox formControlName="unique"></mat-checkbox>
+          </td>
+        </ng-container>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</app-group>
