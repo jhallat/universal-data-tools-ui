@@ -8,18 +8,29 @@ import {databaseReducer} from './state/database.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {DatabaseEffects} from './state/database.effects';
 import {DatabaseTableComponent} from './table/database-table.component';
+import {DatabaseCreateTableComponent} from './create-table/database-create-table.component';
+import {DatabaseEmptyComponent} from './database-empty/database-empty.component';
 
 
 
 @NgModule({
-  declarations: [DatabasePageComponent, DatabaseTableComponent],
+  declarations: [DatabasePageComponent,
+    DatabaseTableComponent,
+    DatabaseEmptyComponent,
+    DatabaseCreateTableComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature('database', databaseReducer),
     EffectsModule.forFeature([DatabaseEffects]),
     SharedModule,
     RouterModule.forChild([
-      {path: 'database', component: DatabasePageComponent }
+      {path: 'database',
+       component: DatabasePageComponent,
+      children: [
+        {path: 'table', component: DatabaseTableComponent},
+        {path: 'create-table', component: DatabaseCreateTableComponent},
+        {path: '**', component: DatabaseEmptyComponent}
+      ]}
     ])
   ]
 })

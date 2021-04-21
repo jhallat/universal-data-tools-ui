@@ -1,4 +1,4 @@
-<app-page [title]='title'>
+<app-page [title]='title' [menus]="menus">
   <div class="database-page">
     <div class="database-navigation">
       <app-group title='Databases' [fullHeight]="true">
@@ -7,8 +7,8 @@
         </div>
       </app-group>
     </div>
-    <div *ngIf="tableSelected" class="database-table">
-      <app-database-table></app-database-table>
+    <div class="database-table">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </app-page>

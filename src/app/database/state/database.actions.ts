@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {DatabaseDef, TableDef} from '../database';
+import {DatabaseDef, TableDef, CreateTableDef} from '../database';
 
 export const loadDatabases = createAction(
   '[Database Page] Load Databases'
@@ -18,4 +18,14 @@ export const loadTable = createAction(
 export const loadTableSuccess = createAction(
   '[Database API] Load Table Success',
   props<{ table: TableDef}>()
+);
+
+export const createTable = createAction(
+  '[Database Page] Create Table',
+  props<{table: CreateTableDef }>()
+);
+
+export const createTableSuccess = createAction(
+  '[Database API] Create Table Success',
+  props<{table: TableDef, database: string}>()
 );

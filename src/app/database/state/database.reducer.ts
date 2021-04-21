@@ -24,6 +24,11 @@ export const getDatabases = createSelector(
   state => state.databases
 );
 
+export const getDatabaseNames = createSelector(
+  getDatabaseState,
+  state => state.databases.map(database => database.name)
+);
+
 export const getSelectedTable = createSelector(
   getDatabaseState,
   state => state.selectedTable
@@ -41,6 +46,20 @@ export const databaseReducer = createReducer<DatabaseState>(
     return {
       ...state,
       selectedTable: action.table
+    };
+  }),
+  on(DatabaseActions.createTableSuccess, (state, action): DatabaseState => {
+    const updatedDatabases = state.databases.map(database => {
+      const updatedDatabase = Object.assign({}, database);
+      if (database.name === action.database) {
+        updatedDatabase.tables.push({ name: action.table.name, schema: action.table.schema});
+      }
+      return updatedDatabase;
+    });
+    return {
+      ...state,
+      selectedTable: action.table,
+      databases: updatedDatabases
     };
   })
 );

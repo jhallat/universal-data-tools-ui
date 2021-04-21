@@ -16,6 +16,7 @@ export interface DatabaseDef {
 
 export interface TableDef {
   name: string;
+  schema: string;
   columns: ColumnDef[];
   primaryKey: string;
   rows: string[][];
@@ -32,3 +33,18 @@ export interface ColumnDef {
   updatable: boolean;
 }
 
+export interface CreateTableDef {
+  database: string;
+  schema: string;
+  name: string;
+  columns: CreateColumnDef[];
+}
+
+export interface CreateColumnDef {
+  name: string;
+  dataType: string;
+  size: number;
+  primaryKey: boolean;
+  notNull: boolean;
+  unique: boolean;
+}

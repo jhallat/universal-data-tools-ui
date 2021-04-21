@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { DivisionComponent } from './division/division.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from "@angular/forms";
 import { PageComponent } from './page/page.component';
 import { GroupComponent } from './group/group.component';
 import { NavigationTreeComponent } from './navigation-tree/navigation-tree.component';
@@ -46,6 +47,7 @@ import { NavigationLeafComponent } from './navigation-tree/navigation-leaf/navig
         MatTooltipModule,
         FontAwesomeModule,
         DivisionComponent,
+        FormsModule,
         ReactiveFormsModule,
         PageComponent,
         GroupComponent,

@@ -6,6 +6,8 @@ import {getDatabases, State, getSelectedTable} from '../state/database.reducer';
 import * as DatabaseActions from '../state/database.actions';
 import {Subscription} from 'rxjs';
 import {DatabaseDef} from '../database';
+import {Menu, MenuBuilder} from '../../shared/page/menu';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-database-page',
@@ -15,13 +17,18 @@ import {DatabaseDef} from '../database';
 export class DatabasePageComponent implements OnInit, OnDestroy {
 
   title = '';
+  menus: Menu[] = [];
   dbNodes: NavigationNode[] = [];
   databases$!: Subscription;
   tableSelected = false;
 
-  constructor(private store: Store<State>) { }
+  constructor(private router: Router, private route: ActivatedRoute, private store: Store<State>) { }
 
   ngOnInit(): void {
+    this.menus = new MenuBuilder().forMenu('Table')
+      .addItem('Create New Table')
+      .withAction(this.onCreateTable)
+      .create();
     this.store.dispatch(DatabaseActions.loadDatabases());
     this.store.select(getConnectionToken).subscribe({
       next: data => {
@@ -61,8 +68,12 @@ export class DatabasePageComponent implements OnInit, OnDestroy {
   }
 
   onNodeSelected(data: any): void {
-    console.log(`selected data = ${JSON.stringify(data)}`);
     this.store.dispatch(DatabaseActions.loadTable({database: data.database, schema: data.schema, table: data.name}));
+    this.router.navigate(['table'], {relativeTo: this.route});
+  }
+
+  onCreateTable = (): void => {
+    this.router.navigate(['create-table'], { relativeTo: this.route });
   }
 
   ngOnDestroy(): void {
