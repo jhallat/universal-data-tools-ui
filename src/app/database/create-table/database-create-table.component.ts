@@ -4,6 +4,7 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {getDatabaseNames, State} from '../state/database.reducer';
 import {createTable} from "../state/database.actions";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-table',
@@ -19,7 +20,10 @@ export class DatabaseCreateTableComponent implements OnInit {
     return this.newTableForm.get('columns') as FormArray;
   }
 
-  constructor(private formBuilder: FormBuilder, private store: Store<State>) { }
+  constructor(private formBuilder: FormBuilder,
+              private store: Store<State>,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
@@ -95,6 +99,9 @@ export class DatabaseCreateTableComponent implements OnInit {
         columns.push(columnDef);
       }
     }
-    this.store.dispatch(createTable({table: {name, schema, database, columns}}));
+    const table = {name, schema, database, columns};
+    console.log(table);
+    this.store.dispatch(createTable({table}));
+    this.router.navigate(['table'], {relativeTo: this.route });
   }
 }
