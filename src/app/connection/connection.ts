@@ -34,10 +34,10 @@ export interface ConnectionToken {
     errorMessage: string;
 }
 
-export const EMPTY_CONNECTION_TOKEN: ConnectionToken = {
+export const STORED_CONNECTION_TOKEN: ConnectionToken = {
     token: window.localStorage.getItem('connection-token') + '',
     description: window.localStorage.getItem('connection-description') + '',
-    type: '',
+    type: window.localStorage.getItem('connection-type') + '',
     page: '',
     valid: window.localStorage.getItem('connection-token') !== null && window.localStorage.getItem('connection-token') !== '',
     errorMessage: ''

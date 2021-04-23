@@ -34,6 +34,7 @@ export class ConnectionService {
       tap(data => {
         window.localStorage.setItem('connection-token', data.token);
         window.localStorage.setItem('connection-description', data.description);
+        window.localStorage.setItem('connection-type', data.type);
       })
     );
   }
@@ -45,6 +46,7 @@ export class ConnectionService {
       .subscribe().unsubscribe();
     window.localStorage.setItem('connection-token', '');
     window.localStorage.setItem('connection-description', '');
+    window.localStorage.setItem('connection-type', '');
     this.router.navigate(['/connection']);
   }
 
