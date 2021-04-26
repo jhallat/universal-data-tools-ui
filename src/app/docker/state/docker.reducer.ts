@@ -1,6 +1,6 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import * as AppState from '../../state/app.state';
-import { DockerContainer } from '../docker';
+import {DockerContainer, DockerImage} from '../docker';
 import * as DockerActions from './docker.actions';
 
 export interface State extends AppState.State {
@@ -9,10 +9,12 @@ export interface State extends AppState.State {
 
 export interface DockerState {
     containers: DockerContainer[];
+    images: DockerImage[];
 }
 
 const initialState: DockerState = {
-    containers: []
+    containers: [],
+    images: []
 };
 
 const getDockerState = createFeatureSelector<DockerState>('docker');
@@ -20,6 +22,11 @@ const getDockerState = createFeatureSelector<DockerState>('docker');
 export const getContainers = createSelector(
     getDockerState,
     state => state.containers
+);
+
+export const getImages = createSelector(
+  getDockerState,
+  state => state.images
 );
 
 export const dockerReducer = createReducer<DockerState>(
@@ -58,6 +65,13 @@ export const dockerReducer = createReducer<DockerState>(
       return {
         ...state,
         containers: updatedContainers
+      };
+    }),
+    on(DockerActions.loadImagesSuccess, (state, action): DockerState => {
+      console.log(action.images);
+      return {
+        ...state,
+        images: action.images
       };
     })
 );

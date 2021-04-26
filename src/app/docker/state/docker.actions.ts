@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {CreateContainerDef, DockerContainer} from '../docker';
+import {CreateContainerDef, DockerContainer, DockerImage} from '../docker';
 
 export const loadContainers = createAction(
     '[Container Page] Load Containers'
@@ -8,6 +8,15 @@ export const loadContainers = createAction(
 export const loadContainersSuccess = createAction(
     '[Container API] Load Containers Success',
     props<{ containers: DockerContainer[] }>()
+);
+
+export const loadImages = createAction(
+  '[Container Page] Load Images'
+);
+
+export const loadImagesSuccess = createAction(
+  '[Container API] Load Images Success',
+  props<{images: DockerImage[] }>()
 );
 
 export const startContainer = createAction(

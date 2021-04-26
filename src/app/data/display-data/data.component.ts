@@ -27,7 +27,7 @@ export class DataComponent implements OnInit, OnDestroy {
       next: data => {
         this.data = data;
         if (data.headings.length === 0) {
-          this.router.navigate(['select-table']);
+          this.router.navigate(['select-database-table']);
         }
       }
     });
@@ -37,7 +37,7 @@ export class DataComponent implements OnInit, OnDestroy {
         if (this.tableName) {
           this.store.dispatch(DataActions.loadData({ tableName: this.tableName }));
         } else {
-          this.router.navigate(['select-table']);
+          this.router.navigate(['select-database-table']);
         }
 
       }

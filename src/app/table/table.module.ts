@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
     StoreModule.forFeature('tables', tableReducer),
     EffectsModule.forFeature([TableEffects]),
     RouterModule.forChild([
-      { path: 'create-table', component: CreateTableComponent}
+      { path: 'create-database-table', component: CreateTableComponent}
     ]),
     SharedModule
   ],

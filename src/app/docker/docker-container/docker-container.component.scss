@@ -1,3 +1,5 @@
+@import '../../shared/style/color/color';
+
 :host {
     font-size: 1rem;
 }
@@ -5,4 +7,39 @@
 .table-cell {
     padding-right: 10px;
     min-width: 50px;
+}
+
+.tabs {
+  padding-left: 5px;
+}
+
+.tab-content {
+  position: absolute;
+  bottom: 50px;
+  top: 0px;
+  left: 30px;
+  right: 30px;
+}
+
+table {
+  border: 1px solid lighten($borderColor, 20%);
+  border-radius: 5px;
+  border-spacing: 0;
+  tr:last-child > td {
+    border-bottom: none;
+  }
+}
+
+th {
+  font-size: 12px;
+  font-weight: 500;
+  color: lighten($labelColor, 20%);
+  border-bottom: 1px solid lighten($borderColor, 25%);
+  padding: 10px;
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid lighten($borderColor, 25%);
+  padding: 10px;
 }

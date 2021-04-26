@@ -24,10 +24,11 @@ import { GroupComponent } from './group/group.component';
 import { NavigationTreeComponent } from './navigation-tree/navigation-tree.component';
 import { NavigationNodeComponent } from './navigation-tree/navigation-node/navigation-node.component';
 import { NavigationLeafComponent } from './navigation-tree/navigation-leaf/navigation-leaf.component';
+import { ButtonTabsComponent } from './button-tabs/button-tabs.component';
 
 
 @NgModule({
-  declarations: [DivisionComponent, PageComponent, GroupComponent, NavigationTreeComponent, NavigationNodeComponent, NavigationLeafComponent],
+  declarations: [DivisionComponent, PageComponent, GroupComponent, NavigationTreeComponent, NavigationNodeComponent, NavigationLeafComponent, ButtonTabsComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -51,7 +52,8 @@ import { NavigationLeafComponent } from './navigation-tree/navigation-leaf/navig
         ReactiveFormsModule,
         PageComponent,
         GroupComponent,
-        NavigationTreeComponent
+        NavigationTreeComponent,
+        ButtonTabsComponent
     ]
 })
 export class SharedModule {

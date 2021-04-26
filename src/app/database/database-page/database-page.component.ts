@@ -7,7 +7,7 @@ import * as DatabaseActions from '../state/database.actions';
 import {Subscription} from 'rxjs';
 import {DatabaseDef} from '../database';
 import {Menu, MenuBuilder} from '../../shared/page/menu';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-database-page',
@@ -73,8 +73,9 @@ export class DatabasePageComponent implements OnInit, OnDestroy {
   }
 
   onCreateTable = (): void => {
-    this.router.navigate(['create-table'], { relativeTo: this.route });
+    this.router.navigate(['create-database-table'], { relativeTo: this.route });
   }
+
 
   ngOnDestroy(): void {
     this.databases$.unsubscribe();
