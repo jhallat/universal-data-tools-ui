@@ -6,7 +6,8 @@ import {ErrorPageComponent} from './error-page/error-page.component';
   imports: [RouterModule.forRoot([
     {path: 'error', component: ErrorPageComponent},
     {path: '**', redirectTo: '/connection'}
-  ])],
+  ]),
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

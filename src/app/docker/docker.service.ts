@@ -50,4 +50,5 @@ export class DockerService {
     return this.http.get<DockerImage[]>(`${this.urlDocker}/images/pulled`);
   }
 
+
  }

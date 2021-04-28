@@ -15,10 +15,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { DivisionComponent } from './division/division.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { PageComponent } from './page/page.component';
 import { GroupComponent } from './group/group.component';
 import { NavigationTreeComponent } from './navigation-tree/navigation-tree.component';
@@ -44,6 +45,7 @@ import { ButtonTabsComponent } from './button-tabs/button-tabs.component';
         MatListModule,
         MatTableModule,
         MatMenuModule,
+        MatSnackBarModule,
         MatTabsModule,
         MatTooltipModule,
         FontAwesomeModule,

@@ -4,6 +4,8 @@ import { getConnectionToken } from './connection/state';
 import { State } from './state/app.state';
 import * as ConnectionActions from './connection/state/connection.actions';
 import {Router} from '@angular/router';
+import {StatusMessageService} from './status-message.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,9 @@ export class AppComponent implements OnInit {
   connection = '';
 
   constructor(private store: Store<State>,
-              private router: Router) { }
+              private router: Router,
+              private statusMessageService: StatusMessageService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -28,6 +32,10 @@ export class AppComponent implements OnInit {
         }
       }
     });
+    this.statusMessageService.connect().subscribe({
+        next: data => this.snackBar.open(data.message, data.subject)
+      }
+    );
   }
 
   disconnect(): void {
