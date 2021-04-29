@@ -50,7 +50,6 @@ export class ConnectionComponent implements OnInit, OnDestroy {
     this.store.dispatch(ConnectionActions.loadConnections());
     this.connections$ = this.store.select(getConnections).subscribe({
       next: data => {
-        console.log(data);
         this.connections = data;
         this.createConnection = this.connections === null || this.connections.length === 0;
       }
@@ -62,7 +61,6 @@ export class ConnectionComponent implements OnInit, OnDestroy {
     });
     this.connect$ = this.store.select(getConnectionToken).subscribe({
       next: data => {
-        console.log(`Page requested: ${data.page}`);
         if (data.valid) {
           this.connectionError = '';
           this.router.navigate([`/${data.page}`]);

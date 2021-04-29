@@ -1,6 +1,7 @@
 @import '../../shared/style/color/color';
 @import '../../shared/style/layout/button-bar';
 @import '../../shared/style/layout/group';
+@import '../../shared/style/layout/input';
 
 .search-item {
   border-bottom: solid 1px lighten($borderColor, 5%);
@@ -13,6 +14,10 @@
       text-decoration: underline;
     }
   }
+}
+
+.select-block {
+  @include select-block;
 }
 
 .page-container {
@@ -74,7 +79,7 @@
   @include group-border;
   min-width: 500px;
   min-height: 50px;
-  max-height: 600px;
+  max-height: 500px;
   overflow-y: scroll;
   margin-top: 40px;
 }

@@ -91,19 +91,6 @@ export class ContainerCreateComponent implements OnInit, OnDestroy {
     });
   }
 
-  //onSearchImageDisplay(): void {
-  //  this.displaySearchDialog = true;
-  //}
-
-  //onSearchImageCanceled(): void {
-  //  this.displaySearchDialog = false;
-  //}
-
-  //onSelectSearchImage(name: string): void {
-  //  this.newContainerForm.get('image')?.setValue(name);
-  //  this.displaySearchDialog = false;
-  //}
-
   onClickAddPort(): void {
     this.addPortField();
   }

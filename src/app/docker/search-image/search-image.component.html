@@ -1,6 +1,22 @@
 <div class="page-container">
   <div class="page-column">
-    <app-group title="Search Images" [fullHeight]="true">
+    <app-group title="Pull Image">
+      <mat-form-field>
+        <mat-label>Image</mat-label>
+        <input matInput [(ngModel)]="selectedImage" (keyup)="onEnterImage()">
+      </mat-form-field>
+      <div class="select-block">
+        <label class="select-label">Image</label>
+        <select [(ngModel)]="selectedTag">
+          <option *ngFor="let tag of tags" [value]="tag">{{ tag }}</option>
+        </select>
+        <div class="button-bar">
+          <button mat-button color='primary' (click)="onPullImage()">Pull</button>
+          <button mat-button color='primary' (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </app-group>
+    <app-group title="Search Images" >
       <mat-form-field>
         <mat-label>Search Name</mat-label>
         <input matInput [(ngModel)]="search"/>
@@ -16,7 +32,6 @@
       </div>
       <div class="button-bar">
         <button mat-button color='primary' (click)="onSearchImage()">Submit</button>
-        <button mat-button color='primary' (click)="onCancel()">Cancel</button>
       </div>
       <div class="list-box">
         <div class="search-item" *ngFor="let searchItem of searchItems">

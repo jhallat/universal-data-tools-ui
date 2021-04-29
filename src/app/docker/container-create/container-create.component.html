@@ -3,7 +3,7 @@
     <app-group title="Create New Container">
       <form novalidate [formGroup]="newContainerForm">
         <div class="select-block">
-          <label class="select-label">Image</label>
+          <label>Image</label>
           <select formControlName="image">
             <option *ngFor="let image of images" [value]="image.tags">{{ image.tags }}</option>
           </select>

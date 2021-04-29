@@ -24,6 +24,8 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { environment } from '../environments/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {LogModule} from './log/log.module';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {statusRxStompConfig} from './status-message';
 
 
 @NgModule({
@@ -50,7 +52,16 @@ import {LogModule} from './log/log.module';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AddConnectionHeaderInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: AddConnectionHeaderInterceptor, multi: true},
+    {
+      provide: InjectableRxStompConfig,
+      useValue: statusRxStompConfig
+    },
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+      deps: [InjectableRxStompConfig]
+    }
   ],
   bootstrap: [AppComponent]
 })

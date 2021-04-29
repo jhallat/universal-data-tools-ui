@@ -1,6 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SearchItem} from '../docker';
 import {DockerService} from '../docker.service';
+import {Subject} from 'rxjs';
+import {debounceTime, map} from 'rxjs/operators';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-search-image',
@@ -9,20 +12,24 @@ import {DockerService} from '../docker.service';
 })
 export class SearchImageComponent implements OnInit {
 
-  @Output()
-  canceled: EventEmitter<void> = new EventEmitter<void>();
-
-  @Output()
-  selected: EventEmitter<string> = new EventEmitter<string>();
-
   search = '';
   officialOnly = false;
   minimumRating = 0;
   searchItems: SearchItem[] = [];
+  tags: string[] = [];
+  subject = new Subject<string>();
+  selectedImage = '';
+  selectedTag = '';
 
-  constructor(private dockerService: DockerService) { }
+  constructor(private dockerService: DockerService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.subject.pipe(
+      debounceTime(1000),
+      map((image: string) => this.dockerService.getTags(image))
+    ).subscribe(data => data.subscribe(tagData => this.tags = tagData));;
   }
 
   onSearchImage(): void {
@@ -35,10 +42,27 @@ export class SearchImageComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.canceled.emit();
+    this.router.navigate(['containers'], {relativeTo: this.route});
   }
 
   onSelect(name: string): void {
-    this.selected.emit(name);
+    this.selectedImage = name;
+    this.dockerService.getTags(name).subscribe({
+      next: data => this.tags = data
+      });
+  }
+
+  onEnterImage(): void {
+    this.subject.next(this.selectedImage);
+  }
+
+  onPullImage(): void {
+    if (this.selectedImage.trim() !== '' && this.selectedTag.trim() !== '') {
+      console.log(`${this.selectedImage}:${this.selectedTag}`);
+      this.dockerService.pullImage(this.selectedImage, this.selectedTag);
+      this.router.navigate(['containers'], {relativeTo: this.route});
+    } else {
+      console.log('Missing parameters');
+    }
   }
 }

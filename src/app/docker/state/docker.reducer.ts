@@ -68,7 +68,6 @@ export const dockerReducer = createReducer<DockerState>(
       };
     }),
     on(DockerActions.loadImagesSuccess, (state, action): DockerState => {
-      console.log(action.images);
       return {
         ...state,
         images: action.images

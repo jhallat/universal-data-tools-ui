@@ -52,7 +52,6 @@ export const connectionReducer = createReducer<ConnectionState>(
         };
     }),
     on(ConnectionActions.loadConnectionsSuccess, (state, action): ConnectionState => {
-      console.log(action.connectionDefinitions);
       return {
             ...state,
             connections: action.connectionDefinitions,
@@ -67,7 +66,6 @@ export const connectionReducer = createReducer<ConnectionState>(
         };
     }),
     on(ConnectionActions.connectSuccess, (state, action): ConnectionState => {
-        console.log(action.connectionToken);
         return {
             ...state,
             connectionToken: action.connectionToken,
