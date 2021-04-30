@@ -1,5 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import {ConnectionDefinition, ConnectionToken, ConnectionType, STORED_CONNECTION_TOKEN, NO_CONNECION} from '../connection';
+import {
+  ConnectionDefinition,
+  ConnectionToken,
+  ConnectionType,
+  STORED_CONNECTION_TOKEN,
+  NO_CONNECION,
+  EMPTY_CONNECTION_TOKEN
+} from '../connection';
 import * as ConnectionActions from './connection.actions';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
@@ -81,7 +88,7 @@ export const connectionReducer = createReducer<ConnectionState>(
     on(ConnectionActions.disconnectSuccess, (state, action): ConnectionState => {
         return {
             ...state,
-            connectionToken: STORED_CONNECTION_TOKEN,
+            connectionToken: EMPTY_CONNECTION_TOKEN,
         };
     })
 );
