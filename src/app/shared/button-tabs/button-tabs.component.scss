@@ -1,0 +1,17 @@
+@import '../../shared/style/color/color';
+
+.button-bar {
+  padding-top: 10px;
+}
+
+.tab-button {
+  background-color: lighten($highlightColor, 12%);
+  border-radius: 15px 5px 0 0;
+  min-width: 100px;
+}
+
+.selected {
+  border-bottom: 2px solid lighten($borderColor, 10%);
+  background-color: lighten($highlightColor, 8%);
+  border-radius: 15px 5px 0 0;
+}

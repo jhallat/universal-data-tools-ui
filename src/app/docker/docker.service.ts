@@ -2,7 +2,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
-import {CreateContainerDef, DockerContainer, SearchItem} from './docker';
+import {CreateContainerDef, DockerContainer, DockerImage, SearchItem} from './docker';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +42,19 @@ export class DockerService {
     if (minimumRating) {
       params.set('minimumRating', String(minimumRating));
     }
-    console.log(`${this.urlDocker}/images/search/${search}`);
     return this.http.get<SearchItem[]>(`${this.urlDocker}/images/search/${search}`, {params});
+  }
+
+  getImages(): Observable<DockerImage[]> {
+    return this.http.get<DockerImage[]>(`${this.urlDocker}/images/pulled`);
+  }
+
+  getTags(image: string): Observable<string[]> {
+    return this.http.get<string[]>(`${this.urlDocker}/image/${image}/tags`);
+  }
+
+  pullImage(image: string, tag: string): void {
+    this.http.put<void>(`${this.urlDocker}/image/pull/${image}/${tag}`, {}).subscribe();
   }
 
  }

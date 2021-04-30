@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import {CreateContainerDef} from '../docker';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {CreateContainerDef, DockerImage} from '../docker';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Store} from '@ngrx/store';
-import {State} from '../state/docker.reducer';
+import {getImages, State} from '../state/docker.reducer';
 import * as DockerAction from '../state/docker.actions';
 import {Router} from '@angular/router';
+import * as DockerActions from '../state/docker.actions';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-container-create',
   templateUrl: './container-create.component.html',
   styleUrls: ['./container-create.component.scss']
 })
-export class ContainerCreateComponent implements OnInit {
+export class ContainerCreateComponent implements OnInit, OnDestroy {
 
   newContainerForm!: FormGroup;
-  displaySearchDialog = false;
+  images: DockerImage[] = [];
+  images$!: Subscription;
 
   get ports(): FormArray{
     return this.newContainerForm.get('ports') as FormArray;
@@ -33,6 +36,12 @@ export class ContainerCreateComponent implements OnInit {
               private store: Store<State>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(DockerActions.loadImages());
+    this.images$ = this.store.select(getImages).subscribe({
+      next: data => {
+        this.images = data;
+      }
+    });
     this.newContainerForm = this.formBuilder.group({
         image: '',
         name: '',
@@ -40,6 +49,10 @@ export class ContainerCreateComponent implements OnInit {
         volumes: this.formBuilder.array([this.buildVolumeField('', '')]),
         environmentVariables: this.formBuilder.array([this.buildEnvironmentVariableField('', '')])
     });
+  }
+
+  ngOnDestroy(): void {
+    this.images$.unsubscribe();
   }
 
   addPortField(): void {
@@ -76,19 +89,6 @@ export class ContainerCreateComponent implements OnInit {
       name,
       value
     });
-  }
-
-  onSearchImageDisplay(): void {
-    this.displaySearchDialog = true;
-  }
-
-  onSearchImageCanceled(): void {
-    this.displaySearchDialog = false;
-  }
-
-  onSelectSearchImage(name: string): void {
-    this.newContainerForm.get('image')?.setValue(name);
-    this.displaySearchDialog = false;
   }
 
   onClickAddPort(): void {

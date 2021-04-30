@@ -31,7 +31,8 @@ import {SearchImageComponent} from './search-image/search-image.component';
         children: [
           {path: '', redirectTo: 'containers', pathMatch: 'full'},
           {path: 'containers', component: DockerContainerComponent},
-          {path: 'create-container', component: ContainerCreateComponent}
+          {path: 'create-container', component: ContainerCreateComponent},
+          {path: 'search-image', component: SearchImageComponent}
         ]
       }
     ]),

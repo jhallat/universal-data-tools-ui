@@ -7,7 +7,7 @@ import {StoreModule} from '@ngrx/store';
 import {databaseReducer} from './state/database.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {DatabaseEffects} from './state/database.effects';
-import {DatabaseTableComponent} from './table/database-table.component';
+import {DatabaseTableComponent} from './database-table/database-table.component';
 import {DatabaseCreateTableComponent} from './create-table/database-create-table.component';
 import {DatabaseEmptyComponent} from './database-empty/database-empty.component';
 
@@ -28,7 +28,7 @@ import {DatabaseEmptyComponent} from './database-empty/database-empty.component'
        component: DatabasePageComponent,
       children: [
         {path: 'table', component: DatabaseTableComponent},
-        {path: 'create-table', component: DatabaseCreateTableComponent},
+        {path: 'create-database-table', component: DatabaseCreateTableComponent},
         {path: '**', component: DatabaseEmptyComponent}
       ]}
     ])

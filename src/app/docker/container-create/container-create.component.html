@@ -2,14 +2,14 @@
   <div class="page-column">
     <app-group title="Create New Container">
       <form novalidate [formGroup]="newContainerForm">
-        <div class="form-line">
-          <mat-form-field>
-            <mat-label>Image</mat-label>
-            <input matInput formControlName="image"/>
-          </mat-form-field>
-          <button mat-icon-button color='primary' (click)="onSearchImageDisplay()">
+        <div class="select-block">
+          <label>Image</label>
+          <select formControlName="image">
+            <option *ngFor="let image of images" [value]="image.tags">{{ image.tags }}</option>
+          </select>
+          <!-- <button mat-icon-button color='primary' (click)="onSearchImageDisplay()">
             <fa-icon [icon]="['fas', 'search']"></fa-icon>
-          </button>
+          </button> -->
         </div>
         <div class="form-line">
           <mat-form-field>
@@ -22,7 +22,8 @@
           <label>Environment Variables</label>
           <button mat-button color='primary' (click)="onClickAddEnvironmentVariable()">Add Variable</button>
         </div>
-        <div class="form-line" formArrayName="environmentVariables" *ngFor="let variable of environmentVariables.controls; let i=index">
+        <div class="form-line" formArrayName="environmentVariables"
+             *ngFor="let variable of environmentVariables.controls; let i=index">
           <div [formGroupName]="i">
             <mat-form-field class="map-field">
               <mat-label>Name</mat-label>
@@ -77,8 +78,8 @@
     </app-group>
   </div>
 </div>
-<div class="search-image-dialog-background" [hidden]="!displaySearchDialog">
+<!-- <div class="search-image-dialog-background" [hidden]="!displaySearchDialog">
   <div class="search-image-dialog">
     <app-search-image (canceled)="onSearchImageCanceled()" (selected)="onSelectSearchImage($event)"></app-search-image>
   </div>
-</div>
+</div> -->

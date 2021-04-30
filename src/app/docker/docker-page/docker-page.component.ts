@@ -25,6 +25,9 @@ export class DockerPageComponent implements OnInit, OnDestroy {
     this.menus = new MenuBuilder().forMenu('Container')
       .addItem('Create New Container')
       .withAction(this.onCreateContainer)
+      .forMenu('Image')
+      .addItem('Pull Image')
+      .withAction(this.onPullImage)
       .create();
     // TODO Since this can happen on any page, find a central way to handle
     this.errorCode$ = this.store.select(getErrorCode).subscribe({
@@ -38,6 +41,10 @@ export class DockerPageComponent implements OnInit, OnDestroy {
 
   onCreateContainer = (): void => {
     this.router.navigate(['create-container'], { relativeTo: this.route });
+  }
+
+  onPullImage = (): void => {
+    this.router.navigate(['search-image'], { relativeTo: this.route });
   }
 
   ngOnDestroy(): void {

@@ -15,19 +15,21 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { DivisionComponent } from './division/division.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { PageComponent } from './page/page.component';
 import { GroupComponent } from './group/group.component';
 import { NavigationTreeComponent } from './navigation-tree/navigation-tree.component';
 import { NavigationNodeComponent } from './navigation-tree/navigation-node/navigation-node.component';
 import { NavigationLeafComponent } from './navigation-tree/navigation-leaf/navigation-leaf.component';
+import { ButtonTabsComponent } from './button-tabs/button-tabs.component';
 
 
 @NgModule({
-  declarations: [DivisionComponent, PageComponent, GroupComponent, NavigationTreeComponent, NavigationNodeComponent, NavigationLeafComponent],
+  declarations: [DivisionComponent, PageComponent, GroupComponent, NavigationTreeComponent, NavigationNodeComponent, NavigationLeafComponent, ButtonTabsComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -43,6 +45,7 @@ import { NavigationLeafComponent } from './navigation-tree/navigation-leaf/navig
         MatListModule,
         MatTableModule,
         MatMenuModule,
+        MatSnackBarModule,
         MatTabsModule,
         MatTooltipModule,
         FontAwesomeModule,
@@ -51,7 +54,8 @@ import { NavigationLeafComponent } from './navigation-tree/navigation-leaf/navig
         ReactiveFormsModule,
         PageComponent,
         GroupComponent,
-        NavigationTreeComponent
+        NavigationTreeComponent,
+        ButtonTabsComponent
     ]
 })
 export class SharedModule {

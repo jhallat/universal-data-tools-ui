@@ -21,6 +21,17 @@ export class DockerEffects {
     );
   });
 
+  loadDockerImages$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(DockerActions.loadImages),
+      mergeMap((action) => this.dockerService.getImages().pipe(
+        map(data => DockerActions.loadImagesSuccess({images: data})),
+        catchError(error => failedApi(error))
+      ))
+    );
+  });
+
+
   startDockerContainer$ = createEffect(() => {
     return this.action$.pipe(
       ofType(DockerActions.startContainer),

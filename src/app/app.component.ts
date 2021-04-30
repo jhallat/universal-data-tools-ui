@@ -4,6 +4,9 @@ import { getConnectionToken } from './connection/state';
 import { State } from './state/app.state';
 import * as ConnectionActions from './connection/state/connection.actions';
 import {Router} from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {RxStompService} from '@stomp/ng2-stompjs';
+import {StatusMessage} from './status-message';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +18,9 @@ export class AppComponent implements OnInit {
   connection = '';
 
   constructor(private store: Store<State>,
-              private router: Router) { }
+              private router: Router,
+              private rxStompService: RxStompService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -27,6 +32,12 @@ export class AppComponent implements OnInit {
           this.connection = '';
         }
       }
+    });
+    this.rxStompService.watch('/topic/status').subscribe(
+        message => {
+            const statusMessage: StatusMessage = JSON.parse(message.body);
+            console.log(statusMessage);
+            this.snackBar.open(statusMessage.message, statusMessage.subject);
     });
   }
 

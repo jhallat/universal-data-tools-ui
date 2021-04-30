@@ -42,3 +42,12 @@ export const STORED_CONNECTION_TOKEN: ConnectionToken = {
     valid: window.localStorage.getItem('connection-token') !== null && window.localStorage.getItem('connection-token') !== '',
     errorMessage: ''
 };
+
+export const EMPTY_CONNECTION_TOKEN: ConnectionToken = {
+  token: '',
+  description: '',
+  type: '',
+  page: '',
+  valid: false,
+  errorMessage: ''
+};

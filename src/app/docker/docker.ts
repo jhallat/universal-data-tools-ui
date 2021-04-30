@@ -37,3 +37,8 @@ export class CreateContainerDef {
   volumes: Volume[] = [];
   environmentVariables: EnvironmentVariable[] = [];
 }
+
+export interface DockerImage {
+  id: string;
+  tags: string;
+}

@@ -38,7 +38,7 @@ export class TableComponent implements OnInit {
   }
 
   onCreateTable() : void {
-    this.router.navigate(['create-table']);
+    this.router.navigate(['create-database-table']);
   }
 
 }

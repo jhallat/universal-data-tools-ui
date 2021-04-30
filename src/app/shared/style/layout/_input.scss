@@ -9,3 +9,15 @@
 @mixin field-large {
   width: 250px;
 }
+
+@mixin select-block {
+  margin-bottom: 15px;
+  label {
+    display: block;
+    padding-left: 3px;
+    padding-bottom: 3px;
+    color: #7474A8;
+    font-size: 0.85em;
+    font-weight: 400;
+  }
+}

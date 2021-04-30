@@ -33,6 +33,10 @@
   @include button-bar;
 }
 
+.select-block {
+  @include select-block;
+}
+
 .map-field {
   margin-right: 10px;
 }
