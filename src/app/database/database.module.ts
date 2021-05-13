@@ -10,6 +10,7 @@ import {DatabaseEffects} from './state/database.effects';
 import {DatabaseTableComponent} from './database-table/database-table.component';
 import {DatabaseCreateTableComponent} from './create-table/database-create-table.component';
 import {DatabaseEmptyComponent} from './database-empty/database-empty.component';
+import {CreateDatabaseComponent} from './create-database/create-database.component';
 
 
 
@@ -17,7 +18,8 @@ import {DatabaseEmptyComponent} from './database-empty/database-empty.component'
   declarations: [DatabasePageComponent,
     DatabaseTableComponent,
     DatabaseEmptyComponent,
-    DatabaseCreateTableComponent],
+    DatabaseCreateTableComponent,
+    CreateDatabaseComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature('database', databaseReducer),
@@ -28,6 +30,7 @@ import {DatabaseEmptyComponent} from './database-empty/database-empty.component'
        component: DatabasePageComponent,
       children: [
         {path: 'table', component: DatabaseTableComponent},
+        {path: 'create-database', component: CreateDatabaseComponent},
         {path: 'create-database-table', component: DatabaseCreateTableComponent},
         {path: '**', component: DatabaseEmptyComponent}
       ]}

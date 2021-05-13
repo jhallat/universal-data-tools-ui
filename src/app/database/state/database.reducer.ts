@@ -1,5 +1,5 @@
 import * as AppState from '../../state/app.state';
-import {DatabaseDef, TableDef} from '../database';
+import {DatabaseDef, DataTypeDef, TableDef} from '../database';
 import {createFeatureSelector, createReducer, createSelector, on} from '@ngrx/store';
 import * as DatabaseActions from './database.actions';
 
@@ -9,11 +9,13 @@ export interface State extends AppState.State {
 
 export interface DatabaseState {
   databases: DatabaseDef[];
+  dataTypes: DataTypeDef[];
   selectedTable: TableDef | undefined;
 }
 
 const initialState: DatabaseState = {
   databases: [],
+  dataTypes: [],
   selectedTable: undefined
 };
 
@@ -34,12 +36,23 @@ export const getSelectedTable = createSelector(
   state => state.selectedTable
 );
 
+export const getDataTypes = createSelector(
+  getDatabaseState,
+  state => state.dataTypes
+)
+
 export const databaseReducer = createReducer<DatabaseState>(
   initialState,
   on(DatabaseActions.loadDatabasesSuccess, (state, action): DatabaseState => {
     return {
       ...state,
       databases: action.databases
+    };
+  }),
+  on(DatabaseActions.loadDataTypesSuccess, (state, action): DatabaseState => {
+    return {
+      ...state,
+      dataTypes: action.dataTypes
     };
   }),
   on(DatabaseActions.loadTableSuccess, (state, action): DatabaseState => {

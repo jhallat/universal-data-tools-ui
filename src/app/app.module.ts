@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
-import { TableModule } from './table/table.module';
 import { EffectsModule } from '@ngrx/effects';
 import { DataModule } from './data/data.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -43,7 +42,6 @@ import {statusRxStompConfig} from './status-message';
     ConnectionModule,
     DockerModule,
     DatabaseModule,
-    TableModule,
     DataModule,
     LogModule,
     AppRoutingModule,

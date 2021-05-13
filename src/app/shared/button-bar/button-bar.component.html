@@ -1,0 +1,5 @@
+<div class="button-bar">
+  <ng-container *ngFor="let button of buttons">
+    <button mat-button color="primary" (click)="button.action()" [disabled]="button.disabled">{{button.caption}}</button>
+  </ng-container>
+</div>

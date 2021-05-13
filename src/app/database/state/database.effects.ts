@@ -21,6 +21,16 @@ export class DatabaseEffects {
     );
   });
 
+  loadDataTypes$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(DatabaseActions.loadDataTypes),
+      mergeMap(() => this.databaseService.getDataTypes().pipe(
+        map(data => DatabaseActions.loadDataTypesSuccess({ dataTypes: data})),
+        catchError(error => failedApi(error))
+      ))
+    );
+  });
+
   loadTable$ = createEffect(() => {
     return this.action$.pipe(
       ofType(DatabaseActions.loadTable),

@@ -44,7 +44,18 @@ export interface CreateColumnDef {
   name: string;
   dataType: string;
   size: number;
+  scale: number;
+  precision: number;
   primaryKey: boolean;
   notNull: boolean;
   unique: boolean;
 }
+
+export interface DataTypeDef {
+  name: string;
+  isLengthProvided: boolean;
+  isScaleProvided: boolean;
+  isPrecisionProvided: boolean;
+}
+
+
