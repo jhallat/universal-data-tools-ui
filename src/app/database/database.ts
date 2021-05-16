@@ -40,6 +40,11 @@ export interface CreateTableDef {
   columns: CreateColumnDef[];
 }
 
+export interface CreateDatabaseDef {
+  name: string;
+  owner: string;
+}
+
 export interface CreateColumnDef {
   name: string;
   dataType: string;

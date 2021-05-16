@@ -25,10 +25,11 @@ export class DatabasePageComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute, private store: Store<State>) { }
 
   ngOnInit(): void {
-    this.menus = new MenuBuilder().forMenu('Table')
-      .addItem('Create New Table').withAction(this.onCreateTable)
+    this.menus = new MenuBuilder()
       .forMenu('Database')
       .addItem('Create New Database').withAction(this.onCreateDatabase)
+      .forMenu('Table')
+      .addItem('Create New Table').withAction(this.onCreateTable)
       .create();
     this.store.dispatch(DatabaseActions.loadDatabases());
     this.store.dispatch(DatabaseActions.loadDataTypes());
@@ -51,6 +52,8 @@ export class DatabasePageComponent implements OnInit, OnDestroy {
   }
 
   private buildNavigationTree(databases: DatabaseDef[]): void {
+    console.log('Navigation Tree');
+    console.log(databases);
     const builder = new NavigationTreeBuilder<{database: string, schema: string, type: string, name: string}>();
     for (const database of databases) {
       builder.forRoot(database.name)

@@ -50,4 +50,14 @@ export class DatabaseEffects {
       ))
     );
   });
+
+  createDatabase$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(DatabaseActions.createDatabase),
+      mergeMap((action) => this.databaseService.createDatabase(action.database).pipe(
+        map(data => DatabaseActions.createDatabaseSuccess({database: data})),
+        catchError(error => failedApi(error))
+      ))
+    );
+  });
 }

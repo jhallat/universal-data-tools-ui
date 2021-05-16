@@ -39,7 +39,7 @@ export const getSelectedTable = createSelector(
 export const getDataTypes = createSelector(
   getDatabaseState,
   state => state.dataTypes
-)
+);
 
 export const databaseReducer = createReducer<DatabaseState>(
   initialState,
@@ -73,6 +73,15 @@ export const databaseReducer = createReducer<DatabaseState>(
       ...state,
       selectedTable: action.table,
       databases: updatedDatabases
+    };
+  }),
+  on(DatabaseActions.createDatabaseSuccess, (state, action): DatabaseState => {
+    const updatedDatabases = state.databases.map(database => Object.assign({}, database));
+    updatedDatabases.push(action.database);
+    return {
+      ...state,
+      databases: updatedDatabases,
+      selectedTable: undefined
     };
   })
 );
