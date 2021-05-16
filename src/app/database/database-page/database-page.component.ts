@@ -25,14 +25,16 @@ export class DatabasePageComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute, private store: Store<State>) { }
 
   ngOnInit(): void {
-    this.menus = new MenuBuilder().forMenu('Table')
-      .addItem('Create New Table')
-      .withAction(this.onCreateTable)
+    this.menus = new MenuBuilder()
+      .forMenu('Database')
+      .addItem('Create New Database').withAction(this.onCreateDatabase)
+      .forMenu('Table')
+      .addItem('Create New Table').withAction(this.onCreateTable)
       .create();
     this.store.dispatch(DatabaseActions.loadDatabases());
+    this.store.dispatch(DatabaseActions.loadDataTypes());
     this.store.select(getConnectionToken).subscribe({
       next: data => {
-        console.log(`Connection Type = ${data.type}`);
         this.title = data.type;
       }
     });
@@ -50,6 +52,8 @@ export class DatabasePageComponent implements OnInit, OnDestroy {
   }
 
   private buildNavigationTree(databases: DatabaseDef[]): void {
+    console.log('Navigation Tree');
+    console.log(databases);
     const builder = new NavigationTreeBuilder<{database: string, schema: string, type: string, name: string}>();
     for (const database of databases) {
       builder.forRoot(database.name)
@@ -76,6 +80,9 @@ export class DatabasePageComponent implements OnInit, OnDestroy {
     this.router.navigate(['create-database-table'], { relativeTo: this.route });
   }
 
+  onCreateDatabase = (): void => {
+    this.router.navigate(['create-database'], { relativeTo: this.route });
+  }
 
   ngOnDestroy(): void {
     this.databases$.unsubscribe();

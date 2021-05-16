@@ -21,6 +21,16 @@ export class DatabaseEffects {
     );
   });
 
+  loadDataTypes$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(DatabaseActions.loadDataTypes),
+      mergeMap(() => this.databaseService.getDataTypes().pipe(
+        map(data => DatabaseActions.loadDataTypesSuccess({ dataTypes: data})),
+        catchError(error => failedApi(error))
+      ))
+    );
+  });
+
   loadTable$ = createEffect(() => {
     return this.action$.pipe(
       ofType(DatabaseActions.loadTable),
@@ -37,6 +47,16 @@ export class DatabaseEffects {
       mergeMap((action) => this.databaseService.createTable(action.table).pipe(
         map(data => DatabaseActions.createTableSuccess({ table: data, database: action.table.database})),
         catchError( error => failedApi(error))
+      ))
+    );
+  });
+
+  createDatabase$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(DatabaseActions.createDatabase),
+      mergeMap((action) => this.databaseService.createDatabase(action.database).pipe(
+        map(data => DatabaseActions.createDatabaseSuccess({database: data})),
+        catchError(error => failedApi(error))
       ))
     );
   });

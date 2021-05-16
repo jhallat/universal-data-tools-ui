@@ -25,6 +25,8 @@
         <th class="table-heading">Name</th>
         <th class="table-heading">Data Type</th>
         <th class="table-heading">Size</th>
+        <th class="table-heading">Scale</th>
+        <th class="table-heading">Precision</th>
         <th class="table-heading">Primary Key</th>
         <th class="table-heading">Not Null</th>
         <th class="table-heading">Unique</th>
@@ -38,13 +40,17 @@
           </td>
           <td>
             <select formControlName="dataType">
-              <option value="int">int</option>
-              <option value="serial">serial</option>
-              <option value="varchar">varchar</option>
+              <option *ngFor="let dataType of dataTypes" [value]="dataType.name">{{ dataType.name }}</option>
             </select>
           </td>
           <td>
-            <input formControlName="size">
+            <input class="input-numeric" formControlName="size">
+          </td>
+          <td>
+            <input class="input-numeric" formControlName="scale">
+          </td>
+          <td>
+            <input class="input-numeric" formControlName="precision">
           </td>
           <td>
             <mat-checkbox formControlName="primaryKey"></mat-checkbox>

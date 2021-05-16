@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from 'src/environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {CreateTableDef, DatabaseDef, TableDef} from './database';
+import {CreateDatabaseDef, CreateTableDef, DatabaseDef, DataTypeDef, TableDef} from './database';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,17 @@ export class DatabaseService {
     return this.http.get<TableDef>(`${this.urlDatabases}/database/table/${database}/${schema}/${table}`);
   }
 
+  getDataTypes(): Observable<DataTypeDef[]> {
+    return this.http.get<DataTypeDef[]>(`${this.urlDatabases}/database/types`);
+  }
+
   createTable(table: CreateTableDef): Observable<TableDef> {
     return this.http.post<TableDef>(`${this.urlDatabases}/database/table`, table);
   }
+
+  createDatabase(database: CreateDatabaseDef): Observable<DatabaseDef> {
+    return this.http.post<DatabaseDef>(`${this.urlDatabases}/database`, database);
+  }
+
+
 }
