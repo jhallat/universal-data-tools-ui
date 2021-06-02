@@ -19,7 +19,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "udt-components": [
+        "dist/udt-components/udt-components",
+        "dist/udt-components"
+      ],
+      "udtc-page": [
+        "dist/udtc-page/udtc-page",
+        "dist/udtc-page"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

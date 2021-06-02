@@ -1,7 +1,9 @@
 type Action = () => void;
 
+const nullAction = () => {};
+
 export class ButtonDef {
   caption = '';
-  action: Action | undefined;
+  action: Action = nullAction;
   disabled ? = false;
 }

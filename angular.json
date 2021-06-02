@@ -125,6 +125,86 @@
           }
         }
       }
+    },
+    "udt-components": {
+      "projectType": "library",
+      "root": "projects/udt-components",
+      "sourceRoot": "projects/udt-components/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/udt-components/tsconfig.lib.json",
+            "project": "projects/udt-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/udt-components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/udt-components/src/test.ts",
+            "tsConfig": "projects/udt-components/tsconfig.spec.json",
+            "karmaConfig": "projects/udt-components/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/udt-components/tsconfig.lib.json",
+              "projects/udt-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "udtc-page": {
+      "projectType": "library",
+      "root": "projects/udtc-page",
+      "sourceRoot": "projects/udtc-page/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/udtc-page/tsconfig.lib.json",
+            "project": "projects/udtc-page/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/udtc-page/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/udtc-page/src/test.ts",
+            "tsConfig": "projects/udtc-page/tsconfig.spec.json",
+            "karmaConfig": "projects/udtc-page/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/udtc-page/tsconfig.lib.json",
+              "projects/udtc-page/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "local-dynamodb-ui"
