@@ -15,7 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { DivisionComponent } from './division/division.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -27,10 +27,18 @@ import { NavigationNodeComponent } from './navigation-tree/navigation-node/navig
 import { NavigationLeafComponent } from './navigation-tree/navigation-leaf/navigation-leaf.component';
 import { ButtonTabsComponent } from './button-tabs/button-tabs.component';
 import { ButtonBarComponent } from './button-bar/button-bar.component';
+import {UdtcPageModule} from 'udtc-page';
 
 
 @NgModule({
-  declarations: [DivisionComponent, PageComponent, GroupComponent, NavigationTreeComponent, NavigationNodeComponent, NavigationLeafComponent, ButtonTabsComponent, ButtonBarComponent],
+  declarations: [DivisionComponent,
+    PageComponent,
+    GroupComponent,
+    NavigationTreeComponent,
+    NavigationNodeComponent,
+    NavigationLeafComponent,
+    ButtonTabsComponent,
+    ButtonBarComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -57,7 +65,8 @@ import { ButtonBarComponent } from './button-bar/button-bar.component';
         GroupComponent,
         NavigationTreeComponent,
         ButtonTabsComponent,
-        ButtonBarComponent
+        ButtonBarComponent,
+        UdtcPageModule
     ]
 })
 export class SharedModule {

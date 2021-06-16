@@ -3,7 +3,7 @@ import {Menu, MenuBuilder} from '../../shared/page/menu';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 // TODO getErrorCode from Docker reducer !!!
-import {getErrorCode} from '../../state/app.reducer';
+import {getErrorCode, getError} from '../../state/app.reducer';
 import {ErrorCode} from '../../shared';
 import {Store} from '@ngrx/store';
 import {State} from '../state/docker.reducer';
@@ -18,6 +18,8 @@ export class DockerPageComponent implements OnInit, OnDestroy {
 
   menus: Menu[] = [];
   errorCode$!: Subscription;
+  errorMessage$!: Subscription;
+  errorMessage = '';
 
   constructor(private router: Router, private route: ActivatedRoute, private store: Store<State>) { }
 
@@ -35,6 +37,11 @@ export class DockerPageComponent implements OnInit, OnDestroy {
         if (data === ErrorCode.NO_CONNECTION) {
           this.router.navigate(['/error']);
         }
+      }
+    });
+    this.errorMessage$ = this.store.select(getError).subscribe({
+      next: data => {
+        this.errorMessage = data;
       }
     });
   }

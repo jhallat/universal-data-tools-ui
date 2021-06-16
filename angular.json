@@ -33,7 +33,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
           },
           "configurations": {
             "production": {
@@ -149,7 +149,7 @@
           "options": {
             "main": "projects/udt-components/src/test.ts",
             "tsConfig": "projects/udt-components/tsconfig.spec.json",
-            "karmaConfig": "projects/udt-components/karma.conf.js"
+            "karmaConfig": "projects/udt-components/karma.conf.js",
           }
         },
         "lint": {

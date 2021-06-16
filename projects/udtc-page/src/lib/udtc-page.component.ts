@@ -18,6 +18,9 @@ import {Menu, MenuItem} from './menu';
           </mat-menu>
         </ng-container>
       </div>
+      <div class="error-message">
+        {{errorMessage}}
+      </div>
     </div>
     <div class='page-contents'>
       <ng-content></ng-content>
@@ -29,7 +32,7 @@ import {Menu, MenuItem} from './menu';
     }
 
     .page-header {
-      background-color: #C89C5F;
+      background-color: #eab56b;
       padding: 10px;
       padding-left: 20px;
       font-size: 1.25rem;
@@ -68,6 +71,9 @@ export class UdtcPageComponent implements OnInit {
 
   @Input()
   menus: Menu[] | undefined;
+
+  @Input()
+  errorMessage = '';
 
   @Output()
   menuClicked = new EventEmitter<MenuItem>();
