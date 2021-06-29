@@ -33,5 +33,7 @@ export class DatabaseService {
     return this.http.post<DatabaseDef>(`${this.urlDatabases}/database`, database);
   }
 
-
+  dropTable(databaseName: string, tableName: string): Observable<void> {
+    return this.http.delete<void>(`${this.urlDatabases}/database/${databaseName}/table/${tableName}`);
+  }
 }

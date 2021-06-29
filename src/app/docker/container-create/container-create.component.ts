@@ -106,6 +106,7 @@ export class ContainerCreateComponent implements OnInit, OnDestroy {
   onClickCreateContainer(): void {
     const definition = new CreateContainerDef();
     definition.image = this.newContainerForm.get('image')?.value + '';
+    console.log(`image name = ${this.newContainerForm.get('image')?.value + ''}`);
     definition.name = this.newContainerForm.get('name')?.value + '';
     for (const port of this.ports.controls) {
       const privatePort = port.get('privatePort') !== null ? port.get('privatePort')?.value : 0;
@@ -123,6 +124,7 @@ export class ContainerCreateComponent implements OnInit, OnDestroy {
       console.log(`variable = ${name}:${value}`);
       definition.environmentVariables.push({ name, value});
     }
+    console.log(definition);
     this.store.dispatch(DockerAction.createContainer({definition}));
     this.router.navigate(['containers']);
   }

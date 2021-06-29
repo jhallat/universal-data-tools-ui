@@ -17,6 +17,7 @@ export interface DatabaseDef {
 export interface TableDef {
   name: string;
   schema: string;
+  database: string;
   columns: ColumnDef[];
   primaryKey: string;
   rows: string[][];

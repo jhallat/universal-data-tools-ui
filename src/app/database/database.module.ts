@@ -11,6 +11,7 @@ import {DatabaseTableComponent} from './database-table/database-table.component'
 import {DatabaseCreateTableComponent} from './create-table/database-create-table.component';
 import {DatabaseEmptyComponent} from './database-empty/database-empty.component';
 import {CreateDatabaseComponent} from './create-database/create-database.component';
+import {DatabaseConfirmDeleteTable} from './database-table/database-confirm-delete-table';
 
 
 
@@ -19,7 +20,8 @@ import {CreateDatabaseComponent} from './create-database/create-database.compone
     DatabaseTableComponent,
     DatabaseEmptyComponent,
     DatabaseCreateTableComponent,
-    CreateDatabaseComponent],
+    CreateDatabaseComponent,
+    DatabaseConfirmDeleteTable],
   imports: [
     CommonModule,
     StoreModule.forFeature('database', databaseReducer),

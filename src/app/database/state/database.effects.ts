@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {DatabaseService} from '../database.service';
-import {act, Actions, createEffect, ofType} from '@ngrx/effects';
+import { Injectable } from '@angular/core';
+import { DatabaseService } from '../database.service';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as DatabaseActions from './database.actions';
-import {catchError, map, mergeMap} from 'rxjs/operators';
-import {failedApi} from '../../shared';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { failedApi } from '../../shared';
 
 @Injectable()
 export class DatabaseEffects {
@@ -57,6 +57,17 @@ export class DatabaseEffects {
       mergeMap((action) => this.databaseService.createDatabase(action.database).pipe(
         map(data => DatabaseActions.createDatabaseSuccess({database: data})),
         catchError(error => failedApi(error))
+      ))
+    );
+  });
+
+  dropTable$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(DatabaseActions.dropTable),
+      mergeMap((action) => this.databaseService.dropTable(action.databaseName, action.tableName).pipe(
+        map(data => DatabaseActions.dropTableSuccess({databaseName: action.databaseName,
+                                                                       tableName: action.tableName})),
+        catchError( error => failedApi(error))
       ))
     );
   });

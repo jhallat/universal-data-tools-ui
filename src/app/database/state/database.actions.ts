@@ -27,7 +27,7 @@ export const loadDataTypes = createAction(
 export const loadDataTypesSuccess = createAction(
   '[Database API] Load Data Types Success',
   props<{ dataTypes: DataTypeDef[]}>()
-)
+);
 
 export const createTable = createAction(
   '[Database Page] Create Table',
@@ -47,4 +47,14 @@ export const createDatabase = createAction(
 export const createDatabaseSuccess = createAction(
   '[Database API] Create Database Success',
   props<{database: DatabaseDef}>()
+);
+
+export const dropTable = createAction(
+  '[Database Page] Delete Database',
+  props<{databaseName: string, tableName: string}>()
+);
+
+export const dropTableSuccess = createAction(
+  '[Database API] Create Database Success',
+  props<{databaseName: string, tableName: string}>()
 );

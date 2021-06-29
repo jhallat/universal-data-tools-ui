@@ -83,5 +83,19 @@ export const databaseReducer = createReducer<DatabaseState>(
       databases: updatedDatabases,
       selectedTable: undefined
     };
+  }),
+  on(DatabaseActions.dropTable, (state, action): DatabaseState => {
+    const updatedDatabases = state.databases.map(database => {
+      const updatedDatabase = Object.assign({}, database);
+      if (database.name === action.databaseName) {
+        updatedDatabase.tables = updatedDatabase.tables.filter(table => table.name !== action.tableName);
+      }
+      return updatedDatabase;
+    });
+    return {
+      ...state,
+      databases: updatedDatabases,
+      selectedTable: undefined,
+    };
   })
 );

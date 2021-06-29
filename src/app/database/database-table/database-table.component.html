@@ -1,6 +1,6 @@
 <app-group title="Table" [fullHeight]="true">
   <div>{{ tableName }}</div>
-
+  <app-button-bar [buttons]="buttons"></app-button-bar>
   <div class="button-bar">
     <button mat-button color="primary" class="tab-button" [ngClass]="{'selected': selectedTab==='definition'}"
             (click)="onSelectTab('definition')">Definition

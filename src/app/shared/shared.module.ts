@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { DivisionComponent } from './division/division.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -49,9 +50,10 @@ import {UdtcPageModule} from 'udtc-page';
         CommonModule,
         MatButtonModule,
         MatCheckboxModule,
-        MatSelectModule,
+        MatDialogModule,
         MatInputModule,
         MatListModule,
+        MatSelectModule,
         MatTableModule,
         MatMenuModule,
         MatSnackBarModule,

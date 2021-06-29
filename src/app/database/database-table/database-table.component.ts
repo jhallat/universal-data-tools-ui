@@ -3,6 +3,10 @@ import {ColumnDef} from '../database';
 import {getSelectedTable, State} from '../state/database.reducer';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
+import {ButtonDef} from '../../shared/button-bar/button-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {DatabaseConfirmDeleteTable} from './database-confirm-delete-table';
+import {dropTable} from "../state/database.actions";
 
 @Component({
   selector: 'app-database-table',
@@ -22,6 +26,7 @@ export class DatabaseTableComponent implements OnInit {
     'updatable'];
   displayedDataColumns: string[] = [];
   tableName = '';
+  databaseName = '';
   selectedTab = 'definition';
 
   columns: ColumnDef[] = [];
@@ -29,9 +34,14 @@ export class DatabaseTableComponent implements OnInit {
   dataRows: any[] = [];
   primaryKey = '';
 
-  constructor(private store: Store<State>) { }
+  buttons: ButtonDef[] = [];
+
+  constructor(private store: Store<State>,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.buttons.push({caption: 'Drop Table', action: this.onDropTable});
+
     this.columns$ = this.store.select(getSelectedTable).subscribe({
       next: data => {
         if (data?.primaryKey !== undefined) {
@@ -45,6 +55,7 @@ export class DatabaseTableComponent implements OnInit {
         }
         if (data?.name !== undefined) {
           this.tableName = data.name;
+          this.databaseName = data.database;
           this.dataRows = [];
           if (data?.rows !== null) {
             data.rows.forEach((row, rowIndex) => {
@@ -57,6 +68,7 @@ export class DatabaseTableComponent implements OnInit {
           }
         } else {
           this.tableName = '';
+          this.databaseName = '';
           this.dataRows = [];
         }
       }
@@ -66,4 +78,18 @@ export class DatabaseTableComponent implements OnInit {
   onSelectTab(tab: string): void {
     this.selectedTab = tab;
   }
+
+  onDropTable = (): void => {
+    const dialogRef = this.dialog.open(DatabaseConfirmDeleteTable, {
+      data: { table: this.tableName }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.store.dispatch(dropTable({ databaseName: this.databaseName,
+                                              tableName: this.tableName}));
+      }
+    });
+
+  }
+
 }
